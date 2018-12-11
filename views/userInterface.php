@@ -21,26 +21,24 @@ foreach (  $route as $value) {
 	<body>
 		<div class="container-fluid" >
 			<div class="row">
-				<div class="col-md-12 " style="background-color: black" >
-					<nav class="navbar navbar-inverse" style="  border: 1px solid;
-						padding: 10px;
-						height: 40px;
-						margin-top:20px;
+				<div class="col-md-12 " style="">
+					<nav class="navbar navbar-inverse" style="
 						box-shadow: 5px 10px 8px #888888;">
 						<div class="container-fluid">
 							<div class="navbar-header">
 								<a class="navbar-brand" href="#">HackerNews</a>
 							</div>
 							<ul class="nav navbar-nav" style="float: right;margin-right: 20px">
-								<li class=<?php if ($path=="home"||$path=="") { echo "active";}?>><a href="/home">Home</a></li>
-								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/job">Job</a></li>
-								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/ask">Ask</a></li>
+								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home">Home</a></li>
+								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
+								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
 							</ul>
 						</div>
 					</nav>
 				</div>
 				
 			</div>
+
 			
 		</div>
 		

@@ -26,14 +26,14 @@ if(!isset($_SESSION['list']))
 			curl_setopt($c, CURLOPT_URL, $url);
 			$ret= json_decode(curl_exec($c),true);
 			curl_close($c);
-			?>
-				<p>
-					<?php echo $ret['title']; ?>
-					<br/>
-					<a href="<?php echo $ret['url']; ?>">Full story</a>
-					<?php echo date("d-m-Y",$ret['time']); ?>
-				</p>
-			<?php
-			$i++;
-		}
-		?>
+?>
+<p>
+	<?php echo $ret['title']; ?>
+	<br/>
+	<a href="<?php echo $ret['url']; ?>">Full story</a>
+	<?php echo date("d-m-Y",$ret['time']); ?>
+</p>
+<?php
+$i++;
+}
+?>
