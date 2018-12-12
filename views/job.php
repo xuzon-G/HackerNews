@@ -1,6 +1,7 @@
 <?php
+include('metaData.php');
 //header("Content-type:application/json");
-	
+   	$obj=new MetaData();	
 	if (!isset($_SESSION['joblist'])) {
 	$url="https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty";
 	$c=curl_init();
@@ -9,7 +10,6 @@
 	$returnData=curl_exec($c);
 	$returnData=json_decode($returnData,true);
 	$returnData=implode("-",$returnData);
-	print_r($returnData);
 	$_SESSION['joblist']=$returnData;
 		curl_close($c);
 	}
@@ -27,12 +27,18 @@
      	$jobData=json_decode(curl_exec($c),true);
 
      	curl_close($c);
+		$obj->getMetaData($jobData['url']);
+ 			 
+
      	?>
-		
-			<div class="col-md-6" style="box-shadow: 5px 10px 8px #888888;height:100px">
-				<h3><?php  echo $jobData['title'] ?></h1>
-			</div>
+     	<p></p>
 			
+		
+			 <!-- <div class="col-md-6" style="box-shadow: 5px 10px 8px #888888;height:100px">  
+			<h3><?php  //echo $jobData['title'] ?></h1>
+				<a href=<?php//echo $jobData['url']; ?>>Full link </a>
+			</div>
+			-->
 		</div>
 
 
