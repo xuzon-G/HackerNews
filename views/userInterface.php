@@ -1,10 +1,14 @@
 <?php
 $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
+$routelist=["home","job"];
 foreach (  $route as $value) {
-	$path=$value;
+	if(array_search($value, $routelist))
+		$path=$value;
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -19,20 +23,30 @@ foreach (  $route as $value) {
 		<link rel="stylesheet" type="text/css" href="/assets/style.css">
 	</head>
 	<body>
-		<div class="container-fluid" >
+		
+			<div class="container-fluid" >
 			<div class="row">
 				<div class="col-md-12 " style="">
 					<nav class="navbar navbar-inverse" style="
-						box-shadow: 5px 10px 8px #888888;">
+						box-shadow: 0px 0px 8px #888888;">
 						<div class="container-fluid">
 							<div class="navbar-header">
+								  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        							<span class="icon-bar"></span>
+        							<span class="icon-bar"></span>
+       								 <span class="icon-bar"></span>
+    								  </button>
 								<a class="navbar-brand" href="#">HackerNews</a>
 							</div>
-							<ul class="nav navbar-nav" style="float: right;margin-right: 20px">
+							 <div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav" style="float: right ;margin-right: 30px" >
 								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home">Home</a></li>
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
 								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
+								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/comments">Comments</a></li>
+								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/show">Show</a></li>
 							</ul>
+						</div>
 						</div>
 					</nav>
 				</div>
@@ -40,7 +54,10 @@ foreach (  $route as $value) {
 			</div>
 
 			
-		</div>
+	
+			 
 		
-	</body>
-</html>
+
+
+		
+		

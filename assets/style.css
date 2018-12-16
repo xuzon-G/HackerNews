@@ -1,0 +1,43 @@
+
+ #navBar ul {
+    list-style-type: none;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+     /* Full height */
+    position: relative;
+    overflow: auto;
+  /*This CSS code tell the un-ordered list what to do. It says to be 200px wide, the background color, and also the height, position and overflow tells it to 'stick' the side of the screnn*/
+}
+
+#navBar li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-align:center;
+
+  border-bottom: 1px solid white;
+
+}
+
+  /*This CSS tells the lists anchor tags how to behave. It says to add padding to the text and to center the text*/
+  
+}
+
+#navBar li a:hover {
+    background-color: #555;
+    color: white;
+  /*This CSS tell the anchor tags to change color when the mouse hovers over it*/
+}
+
+#navBar .active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#navBar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
