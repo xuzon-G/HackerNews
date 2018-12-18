@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/assets/style.css">
+<!-- <link rel="stylesheet" type="text/css" href="/assets/style.css"> -->
 <div class="row">
 		<div class="col-md-2">
 			<div id="navBar">
@@ -16,6 +16,7 @@
 
 <?php 
       include ('metaData.php');
+      include_once('timeConvert.php');
 
 			$url = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty";
 			$c = curl_init();
@@ -27,51 +28,57 @@
 			curl_close($c);
 		
 		$returnData = explode("-",$returnData);
-		$i = 0;
-		$pages = count($returnData)/5;
-		echo $pages."ARE TEHRE<br/>";
 		$obj=new MetaData();
-		foreach ($returnData as $item ) {
-			if($i==5){
-				break;
-			}
-			$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json?print=pretty";
-			$c = curl_init();
-			curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+		$c = curl_init();
+		curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+		for($i=0;$i<=5;$i++){
+			$item = $returnData[$i];
+			$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json";
 			curl_setopt($c, CURLOPT_URL, $url);
 			$ret= json_decode(curl_exec($c),true);
+			$detail = $obj->getMetaData($ret['url']);
+			$image=$detail['image'];
+			$desc=$detail['desc'];
+			$time=new TimeConvert();
+			$timeFormat=$time->get_time_ago($ret['time']);
+		
+			
 
-			curl_close($c);
 
 
-?>
-<div class="col-md-6 " style="box-shadow: 0px 0px 15px -10px #888888;height:150px; overflow: hidden;margin-top: 5px ">
-		<div class="row">
-			<div class="col-md-12">
-				<label><h4><?php  echo $ret['title'];?></h4></label>
+				
+			
+			?>
+			<div class="col-md-6" style="box-shadow: 0px 0px 2px #888888;overflow: hidden;height: 160px">
+				<div class="row">
+				<div class="col-md-12" style="height:50px;">
+					<h4><b><?php echo $ret['title']; ?></b></h4>
+					</div>
+				</div>
+				<div class="row" style="height:80px">
+				<div class="col-md-10" style="font-size:11pt">
+					<?php echo substr($desc,0,150) ;?>
+					<a href=<?php echo $ret['url'] ?>>Read Full Story</a>
+					
+				</div>
+				<div class="col-md-2">
+					<?php if (empty($image)) {
+						?>
+						<img src="/assets/NoImageFound.jpg.png" class="img-responsive" >
+						<?php
+					}else?>
+					<img class="img-responsive" src=<?php echo "'".$image."'"; ?>  >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="height: 20px;color: #98999f">
+					<h6><?php echo $timeFormat; ?></h6>
+				</div>
+			</div>
 				
 			</div>
-			<?php  $obj->getMetaData($ret['url']);  ?>
-			
-		
-	</div>
 
-	
-
-	
-	<?php $i++;
-	}?>
-</div>
-</div>
-</div>
-</div>
-<?php
-
-/**
- * 
- */
-
-
-
-
+		<?php }
 ?>
+</div>
+</div>

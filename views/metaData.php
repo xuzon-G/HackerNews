@@ -22,13 +22,12 @@ class MetaData
 		$this->url=$url;
 		$this->desc_name=$this->getDesc();
 		$this->image_name=$this->getImage();
-		$this->display($this->image_name,$this->desc_name);
+		return [
+			"image"=>$this->metaData[$this->image_name],
+			"desc"=>$this->metaData[$this->desc_name]
+		];
 		
-	
-
 	}
-
-
 
 	public 	function getDesc()
 	{
@@ -61,25 +60,6 @@ class MetaData
 	}
 
 
-	public function display($image,$desc)
-	{  ?>
-
-		
-		</div>
-		<div class="row">
-			<div class="col-md-9">
-			<p><?php  echo substr($this->metaData[$desc],0,300)."<a href=".$this->url."> Read Full Story</a>";  ?></p>
-		
-		</div>
-		<div class="col-md-3 container" >
-			<img style="height: 80px;width:100px;float: right;"class=" img-fluid img-thumbnail" alt="image not found"    src=<?php echo "'".$this->metaData[$image]."'" ; ?> />
-		</div>
-		</div> 
-
-	<?php		
-
-	}
-
-
+	
 }
 ?>

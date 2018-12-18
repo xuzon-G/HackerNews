@@ -1,5 +1,4 @@
 
-<?php include("userInterface.php");?>
 <?php
 
 // $curl=curl_init();//$curl is going to be data type curl resource
@@ -21,9 +20,12 @@ $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
 
 foreach ($route as  $value) {
-	$routeName=$value;
+$routeName=$value;
 }
-
+if ($routeName!='api') {
+	
+ include("userInterface.php");
+}
 session_start();
 class path
 {
@@ -39,6 +41,10 @@ class path
 	{
 		include("ask.php");
 	}
+	function comments()
+	{
+		include('Comments.php');
+	}
 	function error()
 	{
 		echo "<h1>this is error page</h1>";
@@ -46,17 +52,26 @@ class path
 }
 
 $p = new path();
-
 switch($routeName)
 {
+	case "home":
+		$p->home();
+		break;
 	case "job":
 		$p->job();
 		break;
 	case "ask":
 		$p->ask();
 		break;
+	case 'api':
+			$p->api();
+			break;	
+	case 'comments':
+			$p->comments();
+			break;
 	default:
-		$p->home();
+		echo "default";
+		// $p->home();
 		break;
 }
 

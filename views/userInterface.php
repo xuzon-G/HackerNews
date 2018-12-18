@@ -1,10 +1,8 @@
 <?php
 $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
-$routelist=["home","job"];
 foreach (  $route as $value) {
-	if(array_search($value, $routelist))
-		$path=$value;
+	$path=$value;
 }
 ?>
 
