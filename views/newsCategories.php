@@ -33,7 +33,13 @@ class NewsCategories
 			$returnData=json_decode($returnData,true);
 			curl_close($ch);
 			?>
-	$returnData['text'];
+			<div class="row">
+				<div class="col-md-12" style="height:100px">
+					<h4><?php echo $returnData['title'] ; ss?></h4>
+					
+				</div>
+				
+			</div>
 
 				
 	

@@ -39,8 +39,13 @@
 			$detail = $obj->getMetaData($ret['url']);
 			$image=$detail['image'];
 			$desc=$detail['desc'];
+
 			$time=new TimeConvert();
 			$timeFormat=$time->get_time_ago($ret['time']);
+			echo "<pre>";
+
+			print_r($ret);
+			echo("</pre>")
 		
 			
 
@@ -71,8 +76,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12" style="height: 20px;color: #98999f">
+				<div class="col-md-3" style="height: 20px;color: #98999f">
 					<h6><?php echo $timeFormat; ?></h6>
+				</div>
+					<div class="col-md-3 col-md-offset-1" style="height: 20px;color: #98999f">
+					<h6><?php echo "by ".$ret['by']; ?></h6>
+				</div>
+					<div class="col-md-3 col-md-offset-1" style="height: 20px;color: #98999f">
+					<h6><i class="fas fa-comments" style="font-size:15px"></i></h6>
 				</div>
 			</div>
 				
