@@ -32,6 +32,10 @@
 		$detail = $obj->getMetaData($jobData['url']);
 			$image=$detail['image'];
 			$desc=$detail['desc'];
+
+			echo "<pre>";
+			print_r($jobData);
+			echo "</pre>";
 			$time=new TimeConvert();
 			$timeFormat=$time->get_time_ago($ret['time']);
 		

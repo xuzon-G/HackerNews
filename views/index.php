@@ -69,10 +69,7 @@ switch($routeName)
 	case 'comments':
 			$p->comments();
 			break;
-	default:
-		echo "default";
-		// $p->home();
-		break;
+
 }
 
 

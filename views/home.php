@@ -1,4 +1,10 @@
 <!-- <link rel="stylesheet" type="text/css" href="/assets/style.css"> -->
+<?php 
+$route = $_SERVER["REQUEST_URI"];
+
+echo ($route);
+?>
+
 <div class="row">
 		<div class="col-md-2">
 			<div id="navBar">
@@ -31,7 +37,7 @@
 		$obj=new MetaData();
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-		for($i=0;$i<=5;$i++){
+		for($i=0;$i<=20;$i++){
 			$item = $returnData[$i];
 			$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json";
 			curl_setopt($c, CURLOPT_URL, $url);
@@ -39,19 +45,10 @@
 			$detail = $obj->getMetaData($ret['url']);
 			$image=$detail['image'];
 			$desc=$detail['desc'];
+		
 
 			$time=new TimeConvert();
 			$timeFormat=$time->get_time_ago($ret['time']);
-			echo "<pre>";
-
-			print_r($ret);
-			echo("</pre>")
-		
-			
-
-
-
-				
 			
 			?>
 			<div class="col-md-6" style="box-shadow: 0px 0px 2px #888888;overflow: hidden;height: 160px">
@@ -83,7 +80,18 @@
 					<h6><?php echo "by ".$ret['by']; ?></h6>
 				</div>
 					<div class="col-md-3 col-md-offset-1" style="height: 20px;color: #98999f">
-					<h6><i class="fas fa-comments" style="font-size:15px"></i></h6>
+					<h6><?php echo $ret['descendants']." ";?> 
+					<?php
+					if ($ret['descendants']==0) {?>
+						<a href=<?php echo $route."/comments";?>><i class="fas fa-comments" style="font-size:15px" ></i></a></h6>
+						
+					<?php }else {?>
+						<i class="fas fa-comments" style="font-size:15px"></i></h6>
+					
+					<?php }?>
+									
+
+					 
 				</div>
 			</div>
 				
