@@ -37,7 +37,7 @@ echo ($route);
 		$obj=new MetaData();
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-		for($i=0;$i<=20;$i++){
+		for($i=0;$i<=2;$i++){
 			$item = $returnData[$i];
 			$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json";
 			curl_setopt($c, CURLOPT_URL, $url);
@@ -72,18 +72,21 @@ echo ($route);
 					<img class="img-responsive" src=<?php echo "'".$image."'"; ?>  >
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-3" style="height: 20px;color: #98999f">
+			<div class="row" style="height: 30px">
+				<div class="col-md-3" style="color: #98999f">
 					<h6><?php echo $timeFormat; ?></h6>
 				</div>
-					<div class="col-md-3 col-md-offset-1" style="height: 20px;color: #98999f">
+					<div class="col-md-3 col-md-offset-1" style="color: #98999f">
 					<h6><?php echo "by ".$ret['by']; ?></h6>
 				</div>
-					<div class="col-md-3 col-md-offset-1" style="height: 20px;color: #98999f">
+					<div class="col-md-3 col-md-offset-1" style="color: #98999f">
 					<h6><?php echo $ret['descendants']." ";?> 
 					<?php
-					if ($ret['descendants']==0) {?>
-						<a href=<?php echo $route."/comments";?>><i class="fas fa-comments" style="font-size:15px" ></i></a></h6>
+					if ($ret['descendants']==0) {
+						// session_start();
+						// $_SESSION['comments']=$item;
+						?>
+						<a href=<?php echo "/views/comments?id=".$item;?>><i class="fas fa-comments" style="font-size:15px" ></i></a></h6>
 						
 					<?php }else {?>
 						<i class="fas fa-comments" style="font-size:15px"></i></h6>

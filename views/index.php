@@ -19,11 +19,13 @@ error_reporting(E_ALL);
 $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
 
-foreach ($route as  $value) {
-$routeName=$value;
-}
-if ($routeName!='api') {
-	
+// foreach ($route as  $value) {
+// $routeName=$value;
+// }
+$routeName= $route[2];
+$routeName = explode("?", $routeName);
+$routeName = $routeName[0];
+if ($routeName!='api') {	
  include("userInterface.php");
 }
 session_start();
@@ -49,8 +51,9 @@ class path
 	{
 		echo "<h1>this is error page</h1>";
 	}
-}
+	
 
+}
 $p = new path();
 switch($routeName)
 {
@@ -64,11 +67,12 @@ switch($routeName)
 		$p->ask();
 		break;
 	case 'api':
-			$p->api();
-			break;	
+		$p->ask();
+		break;	
 	case 'comments':
-			$p->comments();
-			break;
+		$p->comments();
+		break;
+
 
 }
 
