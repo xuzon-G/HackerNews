@@ -42,7 +42,7 @@ foreach (  $route as $value) {
 								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home">Home</a></li>
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
 								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
-								<li class=<?php if ($path=="show") { echo "active";}else{ echo "";}?>><a href="/views/show">Show</a></li>
+								<li class=<?php if ($path=="shows") { echo "active";}else{ echo "";}?>><a href="/views/shows">Show</a></li>
 							</ul>
 						</div>
 						</div>

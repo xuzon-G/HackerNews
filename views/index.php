@@ -47,6 +47,10 @@ class path
 	{
 		include('Comments.php');
 	}
+	function shows()
+	{
+		include('show.php');
+	}
 	function error()
 	{
 		echo "<h1>this is error page</h1>";
@@ -66,8 +70,8 @@ switch($routeName)
 	case "ask":
 		$p->ask();
 		break;
-	case 'api':
-		$p->ask();
+	case 'shows':
+		$p->shows();
 		break;	
 	case 'comments':
 		$p->comments();
