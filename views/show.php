@@ -4,11 +4,9 @@
 
 <?php
 
-		
-	include('metaData.php');
 	include('timeConvert.php');
 	//header("Content-type:application/json");
-			$obj=new MetaData();
+		
 
 		$url="https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty";
 		$c=curl_init();
@@ -31,8 +29,6 @@
 		curl_setopt($c, CURLOPT_URL, $url);
 		$showData=json_decode(curl_exec($c),true);
 		curl_close($c);
-		$detail = $obj->getMetaData($showData['url']);
-			$image=$detail['image'];
 			$time=new TimeConvert();
 			$timeFormat=$time->get_time_ago($showData['time']);
 
@@ -58,7 +54,7 @@
 					<div class="col-md-1 " style="color: #98999f">
 					<h6><?php echo $showData['descendants']." ";?> 
 					<?php
-					if ($askData['descendants']>0) {
+					if ($showData['descendants']>0) {
 						// session_start();
 						// $_SESSION['comments']=$item;
 						?>

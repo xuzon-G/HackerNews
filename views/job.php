@@ -33,7 +33,7 @@
 			$image=$detail['image'];
 			$desc=$detail['desc'];
 			$time=new TimeConvert();
-			$timeFormat=$time->get_time_ago($ret['time']);
+			$timeFormat=$time->get_time_ago($jobData['time']);
 		
 			// 
 				
@@ -43,13 +43,13 @@
 		<div class="col-md-6" style="box-shadow: 0px 0px 2px #888888;overflow: hidden;height: 160px" >
 				<div class="row">
 				<div class="col-md-12" style="height:50px;">
-					<h4><b><?php echo $jobData['title']; ?></b></h4>
+					<h4><b><a href=<?php echo $jobData['url']?>><?php echo $jobData['title']; ?></a></b></h4>
 					</div>
 				</div>
 				<div class="row" style="height:50px">
 				<div class="col-md-10" style="font-size:11pt">
 					<?php echo substr($desc,0,150) ;?>
-					<a href=<?php echo $jobData['url'] ?>>Read Full Story</a>
+					<a href=<?php echo $jobData['url'] ?>>Full Details</a>
 					
 				</div>
 				<div class="col-md-2">
@@ -63,16 +63,20 @@
 				</div>
 			</div>
 			<div class="row">
-					<div class="col-md-2 col-md-offset-1" style="color: #98999f">
-					<h6><?php echo $timeFormat; ?></h6>
+					<div class="col-md-3 " style="color: #98999f">
+					<h6><a href=<?php echo "/views/comments?id=".$jobList;?>> view post details</a></h6>
+				</div> 
+					<div class="col-md-3" style="color: #98999f">
+					<h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo $timeFormat; ?></h6>
+				</div> 
+				
+						<div class="col-md-3 " style="color: #98999f">
+					<h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $jobData['by']; ?></h6>
 				</div>
-						<div class="col-md-2 col-md-offset-1" style="color: #98999f">
-					<h6><?php echo "by ".$jobData['by']; ?></h6>
-				</div>
-					<div class="col-md-2 col-md-offset-1" style="color: #98999f">
+					<div class="col-md-3 " style="color: #98999f">
 					<h6><?php echo $jobData['descendants']." ";?> 
 					<?php
-					if ($askData['descendants']>0) {
+					if ($jobData['descendants']>0) {
 						// session_start();
 						// $_SESSION['comments']=$item;
 						?>

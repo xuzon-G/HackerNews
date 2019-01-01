@@ -1,14 +1,14 @@
-<div class="row">
+<div class="row container">
 		<div class="col-md-12" >
 			<div class="row container-fluid">
 
 <?php
 
 		
-	include('metaData.php');
+
 	include('timeConvert.php');
 	//header("Content-type:application/json");
-			$obj=new MetaData();
+		
 
 		$url="https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty";
 		$c=curl_init();
@@ -31,8 +31,7 @@
 		curl_setopt($c, CURLOPT_URL, $url);
 		$askData=json_decode(curl_exec($c),true);
 		curl_close($c);
-		$detail = $obj->getMetaData($askData['url']);
-			$image=$detail['image'];
+		
 			$time=new TimeConvert();
 			$timeFormat=$time->get_time_ago($askData['time']);
 
@@ -48,14 +47,18 @@
 					<h4><b><?php echo $askData['title']; ?></b></h4>
 					</div>
 				</div>
-				<div class="row" >
-				<div class="col-md-1" style="color: #98999f">
-					<h6><?php echo $timeFormat; ?></h6>
+					<div class="row">
+					<div class="col-md-3 " style="color: #98999f">
+					<h6><a href=""> view post details</a></h6>
+				</div> 
+					<div class="col-md-3" style="color: #98999f">
+					<h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo $timeFormat; ?></h6>
+				</div> 
+				
+						<div class="col-md-3 " style="color: #98999f">
+					<h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $askData['by']; ?></h6>
 				</div>
-					<div class="col-md-1 " style="color: #98999f">
-					<h6><?php echo "by ".$askData['by']; ?></h6>
-				</div>
-					<div class="col-md-1 " style="color: #98999f">
+					<div class="col-md-3 " style="color: #98999f">
 					<h6><?php echo $askData['descendants']." ";?> 
 					<?php
 					if ($askData['descendants']>0) {
@@ -72,6 +75,7 @@
 
 					 
 				</div>
+				
 			</div>
 			
 				

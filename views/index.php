@@ -19,10 +19,11 @@ error_reporting(E_ALL);
 $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
 
+
 // foreach ($route as  $value) {
 // $routeName=$value;
 // }
-$routeName= $route[2];
+$routeName= $route[count($route)-1];
 $routeName = explode("?", $routeName);
 $routeName = $routeName[0];
 if ($routeName!='api') {	
@@ -43,13 +44,17 @@ class path
 	{
 		include("ask.php");
 	}
-	function comments()
+	function newsCategories()
 	{
-		include('Comments.php');
+		include('newsCategories.php');
 	}
 	function shows()
 	{
 		include('show.php');
+	}
+	function comments()
+	{
+		include('Comments.php');
 	}
 	function error()
 	{
@@ -75,6 +80,12 @@ switch($routeName)
 		break;	
 	case 'comments':
 		$p->comments();
+		break;
+
+	case 'NewStories':
+	case 'TopStories':
+	case 'BestStories':
+		$p->newsCategories();
 		break;
 
 
