@@ -20,6 +20,9 @@ foreach (  $route as $value) {
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="/assets/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 	</head>
 	<body>
 		
@@ -43,6 +46,7 @@ foreach (  $route as $value) {
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
 								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
 								<li class=<?php if ($path=="shows") { echo "active";}else{ echo "";}?>><a href="/views/shows">Show</a></li>
+									<li ><a href="/views/login">Login<i class="fas fa-sign-in-alt"></i></a></li>
 							</ul>
 						</div>
 						</div>

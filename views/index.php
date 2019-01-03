@@ -56,6 +56,10 @@ class path
 	{
 		include('Comments.php');
 	}
+		function login()
+	{
+		include('login.php');
+	}
 	function error()
 	{
 		echo "<h1>this is error page</h1>";
@@ -80,6 +84,9 @@ switch($routeName)
 		break;	
 	case 'comments':
 		$p->comments();
+		break;
+		case 'login':
+		$p->login();
 		break;
 
 	case 'NewStories':

@@ -47,10 +47,23 @@ include('metaData.php');
 
 		
 		<div class="container well" style="width: 80%">
-			<h4><?php if ($returnCmt['descendants']) {
+			<h4><?php if ($returnCmt['descendants']>1) {
 				echo   $returnCmt['descendants']." Comments";
+			}elseif ($returnCmt['descendants']==1) {
+				echo $returnCmt['descendants']." Comment";
 			}else echo "No Comments"; ?></h4>
-			<hr style="size: 5px">
+			 <hr style="size: 5px">
+		<div class="row">
+			        <form class="form" role="form" method="POST" action="#">
+            <div class="form-group">
+                   <textarea class="form-control" rows="5" id="comment" placeholder="Your Comment"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default">Comment</button>
+                <hr style="size: 5px">
+            </div>
+        </form>
+    </div>
 			<div class="row">
 				<?php
 				 $c=new Comments();
