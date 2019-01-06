@@ -1,9 +1,11 @@
 <?php
+session_start();
 $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
 foreach (  $route as $value) {
 	$path=$value;
 }
+
 ?>
 
 
@@ -20,12 +22,14 @@ foreach (  $route as $value) {
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="/assets/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
+
+			<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	
+		
 
 	</head>
 	<body>
-		
 			<div class="container-fluid" >
 			<div class="row">
 				<div class="col-md-12 " style="">
@@ -46,7 +50,28 @@ foreach (  $route as $value) {
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
 								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
 								<li class=<?php if ($path=="shows") { echo "active";}else{ echo "";}?>><a href="/views/shows">Show</a></li>
-									<li ><a href="/views/login">Login<i class="fas fa-sign-in-alt"></i></a></li>
+								
+								<li class="login">
+
+									<?php if(isset($_SESSION['user']))
+									{ 
+										
+										
+								 		?>
+										 
+									    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown" style="color: white"><?php echo $_SESSION['user'];?>
+									    <span class="caret"></span></a>
+									    <ul class="dropdown-menu">
+									      <li><a href="/views/logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
+									   
+									    </ul>
+								
+									<?php } else{?>
+
+
+								 <a href="/views/login">Login<i class="fas fa-sign-in-alt"></i></a> 
+							<?php } ?>
+							</li>
 							</ul>
 						</div>
 						</div>

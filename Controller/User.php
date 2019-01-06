@@ -3,6 +3,7 @@
 /**
  * 
  */
+
 if (isset($_POST['user'])) {
 	$user=new User();
 	$userInfo=$_POST['user'];
@@ -14,6 +15,10 @@ if (isset($_POST['user'])) {
 		case 'Create':
 			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password']);
 			break;
+
+		case 'Comment':
+			$user->commentUser($_POST['uname'],$_POST['cmt'],$_POST['hid'],$_POST['redirect_path']);
+				break;
 	}
 }
 
@@ -24,17 +29,7 @@ class User
 	public $conn;
 	function __construct()
 	{
-		
-	$servername = "localhost";
-	$username = "root";
-	$password = "just";
-	$db="hackernews";
-	$this->conn =  mysqli_connect($servername,$username,$password,$db);
-
-// Check connection
-	if ($this->conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
-	}
+		include 'Connection.php';
 	
 	}
 
@@ -51,7 +46,7 @@ class User
 		
 		if(mysqli_query($this->conn,$query))
 		{
-			header('Location:/views');
+			header('Location:/viewss');
 		}else
 		{
 			echo "insert failed";
@@ -70,20 +65,49 @@ class User
 			$result=mysqli_query($this->conn,$query);
 			if (mysqli_num_rows($result)>0) {
 				$data=mysqli_fetch_assoc($result);
-				echo "<pre>";
-				print_r($data);
-				echo "</pre>";
 					if ($this->helper($password)==$data['password'] ) {
-					echo "password matched";
+					session_start();
+					$_SESSION['user']=$username;
+					
+
+					header('location:/views/home');
+					
 				}
 				else{
 				echo "wrong password try again";
+
 				}
 			
 			
 		}
 		
 	
+
+	}
+	public function commentUser($uname,$cmt,$hid,$back)
+	{
+		
+			 $query="Select id from tbl_user where uname='".$uname."'";
+
+		
+			$result=mysqli_query($this->conn,$query);
+			$data=mysqli_fetch_assoc($result);
+		
+			$uid=$data['id'];
+ 
+
+			$queryCmt="Insert into tbl_comment SET uid='".$uid."',
+											hid='".$hid."',
+											created_at=".Time().",
+											data='".$cmt."'";
+
+			if(mysqli_query($this->conn,$queryCmt))
+		{
+			header("location:".$back);
+		}else
+		{
+			echo "insert failed";
+		}
 
 	}
 

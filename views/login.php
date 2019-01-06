@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['user'])) {
+ header('location:/views/home');
+ }
+ else { 
+?>
 
 <div class="container">
   <div class="row">
@@ -56,3 +63,4 @@
   </div>
 </div>
 
+<?php }?>
