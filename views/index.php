@@ -60,6 +60,10 @@ class path
 	{
 		include('login.php');
 	}
+	function asmt()
+	{
+		include 'Asmt.php';
+	}
 	function error()
 	{
 		echo "<h1>this is error page</h1>";
@@ -88,6 +92,9 @@ switch($routeName)
 		case 'login':
 		$p->login();
 		break;
+	case 'Asmt':
+			$p->asmt();
+			break;	
 
 	case 'NewStories':
 	case 'TopStories':

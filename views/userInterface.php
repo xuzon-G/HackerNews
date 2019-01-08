@@ -50,6 +50,7 @@ foreach (  $route as $value) {
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
 								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
 								<li class=<?php if ($path=="shows") { echo "active";}else{ echo "";}?>><a href="/views/shows">Show</a></li>
+								<li class=<?php if ($path=="Asmt") { echo "active";}else{ echo "";}?>><a href="/views/Asmt">ASMT</a></li>
 								
 								<li class="login">
 
