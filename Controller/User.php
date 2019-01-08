@@ -19,6 +19,9 @@ if (isset($_POST['user'])) {
 		case 'Comment':
 			$user->commentUser($_POST['uname'],$_POST['cmt'],$_POST['hid'],$_POST['redirect_path']);
 				break;
+		case 'Post':
+				$user->userPost($_POST['uname'],$_POST['postDetail']);
+			break;
 	}
 }
 
@@ -111,10 +114,32 @@ class User
 
 	}
 
+	public function userPost($uname,$post)
+	{
+		
+		$query="Insert into tbl_post SET uname='".$uname."',
+											created_at=".Time().",
+											post='".$post."'";
+											
+											
+					
+		
+		if(mysqli_query($this->conn,$query))
+		{
+			header('Location:/views/Asmt');
+		}else
+		{
+			echo "insert failed";
+		}
+
+	}
+
 	private function helper($password)
 	{
 		return hash("SHA256", $password);
 	}
 }
+
+
 
 ?>
