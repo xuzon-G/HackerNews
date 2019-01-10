@@ -1,5 +1,14 @@
 <?php
 session_start();
+include('timeConvert.php');
+include('../Controller/User.php');
+include('../Controller/GetCommentData.php');
+
+$post=new User();
+$viewPost=array_reverse(  $post->viewUserpost());
+$i=1;
+$comment=new CommentData();
+
 ?>
 
 <div class="container" style="width: 80%">
@@ -12,12 +21,149 @@ session_start();
             <div class="form-group">
                    <textarea class="form-control" rows="3" id="comment" placeholder="POST YOUR THOUGHTS" name="postDetail" required=""></textarea>
                     <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
-                    <div class="co-md-12"> <input type="submit" class="btn btn-default" name="user" value="Post"  style="float: right"><div>
+                    <div class="co-md-12" style="margin-top: 5px"> <input type="submit" class="btn " name="user" value="Post"  style="float: right;background-color:#222;color:white; ">
+                    </div>
+
+
              </div>
+          
                     
             
         
                 
         </form>
+
     </div>
+    <div class="row">
+        <hr>
+    </div>
+
+<?php foreach ($viewPost as $key => $post) {
+
+    if ($key==0) {
+        $margintop="5px";
+    }
+    ?>
+
+   
+     <div class="panel panel-default row" style="margin-top: <?php echo $margintop;?>">
+   
+    <div class="panel-body">
+        
+            <h4>  <?php echo $post['post'];?>   </h4>
+     
+    </div>
+    <div class="panel-footer col-md-12">
+                  <div class="col-md-1">
+                 <h5> <a href=""> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
+                </div>
+            
+                <div class="col-md-2"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
+                           </div>
+                <div class="col-md-2">
+                     <h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $post['uname']; ?></h6>
+                </div>
+            
+                  <div class="col-md-2">
+                  <a style="color:black;text-decoration: none" href="" id="cmt_link_<?php echo $i; ?>" data-toggle="modal" data-target="#cmtModal<?php echo $i; ?>"><h6><i class="fas fa-comments" style="font-size:15px"></i> Comment</h6></a>
+              </div>
+      <div class="row">
+      <hr>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="cmtModal<?php echo $i; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <div class="col-md-12">  
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="col-md-12">
+             <h4 class="modal-title" id="exampleModalLabel"> <?php echo $post['post'];?> </h4>
+        </div>
+       
+     
+      </div>
+   
+   
+      <div class="modal-body row">
+           <div class="col-md-1">
+                 <h5> <a href=""> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
+                </div>
+         <div class="col-md-3"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
+                           </div>
+                <div class="col-md-3">
+                     <h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $post['uname']; ?></h6>
+                </div>         
+                  <div class="col-md-3">
+                  <h6><i class="fas fa-comments" style="font-size:15px"></i>Comment</h6>
+              </div>
+
+              <div class="col-md-12">
+                
+
+                  <form class="form" role="form" method="post" action=<?php if (isset($_SESSION['user'])){
+                        echo "/Controller/User.php";
+                    }else { echo "/views/login";} ?> >
+                  
+                        
+            <div class="form-group">
+                   <textarea class="form-control" rows="3" id="comment" placeholder="your Comment" name="cmt" required=""></textarea>
+                    <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
+                    <input type="hidden" name="hid" value=<?php echo $post['pid']?>>
+                    <div class="co-md-12" style="margin-top: 5px"> <button type="submit" class="btn " name="user" value="asmtComment"  style="float: right;background-color:#222;color:white; ">Comment</button>
+                    </div>
+
+
+             </div>
+          
+            </form>
+
+
+
+              </div>
+      
+        <div class="container col-md-12  " style="background-color: #f5f5f5;margin-top: 5px">
+                     <?php $cmt=$comment->getData($post['pid']);
+                          foreach ($cmt as $key => $data) {
+                        ?>
+       
+              
+                <div class="col-md-12" >
+                <b><?php echo TimeConvert::get_time_ago($data['created_at'])." ".$data['uname'];?></b></br> 
+                </div>
+                <div class="col-md-12">
+                <p><?php echo $data['data']; ?> </p>   
+                </div>
+           
+            <?php }?>
+       </div>
+   </div>
+
+     
+
+
+    </div>
+  </div>
 </div>
+                                
+             
+    </div>
+  </div>
+
+
+
+
+   <?php $i++;} ?>
+</div>
+
+  <?php
+    if(isset($_REQUEST['post']))
+    {
+        echo "<script> document.getElementById('cmt_link_".$post['pid']."').click() </script>";
+    }
+  ?>

@@ -27,13 +27,14 @@ class CommentData
 	}
 		return $data;
 	}
+
 	public function countComment($hid)
 	{
 			$data = array();
 		$query="SELECT tbl_comment.* ,tbl_user.uname FROM hackernews.tbl_comment,hackernews.tbl_user where tbl_comment.uid=tbl_user.id && tbl_comment.hid=".$hid;
 
 		$result=mysqli_query($this->conn,$query);
-		 return echo mysqli_num_rows($result);
+		 return mysqli_num_rows($result);
 	}
 }
 

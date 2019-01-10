@@ -19,6 +19,12 @@ if (isset($_POST['user'])) {
 		case 'Comment':
 			$user->commentUser($_POST['uname'],$_POST['cmt'],$_POST['hid'],$_POST['redirect_path']);
 				break;
+
+		case 'asmtComment':
+	
+		$user->asmtComment($_POST['uname'],$_POST['cmt'],$_POST['hid']);
+		break;
+
 		case 'Post':
 				$user->userPost($_POST['uname'],$_POST['postDetail']);
 			break;
@@ -136,12 +142,49 @@ class User
 	public function viewUserPost()
 	{
 				$queryPost="Select *from tbl_post ";
-				if (mysqli_query($this->conn,$query)) {
+				$result=mysqli_query($this->conn,$queryPost);
+					$i=0;
+			while($row = mysqli_fetch_assoc($result))
+			{ 
+					$data[$i]=$row;
+					$i++;
+				
 					
-				}else{
-					echo "error";
-				}
+				
+			}
+				return $data;
+			
 	}
+
+
+
+public function asmtComment($uname,$cmt,$hid)
+	{
+		
+			 $query="Select id from tbl_user where uname='".$uname."'";
+
+		
+			$result=mysqli_query($this->conn,$query);
+			$data=mysqli_fetch_assoc($result);
+		
+			$uid=$data['id'];
+ 
+
+			$queryCmt="Insert into tbl_comment SET uid='".$uid."',
+											hid='".$hid."',
+											created_at=".Time().",
+											data='".$cmt."'";
+
+			if(mysqli_query($this->conn,$queryCmt))
+		{
+			header("location:/views/Asmt?post=".($hid));
+		}else
+		{
+			echo "insert failed";
+		}
+
+	}
+
 
 	private function helper($password)
 	{
