@@ -133,6 +133,15 @@ class User
 		}
 
 	}
+	public function viewUserPost()
+	{
+				$queryPost="Select *from tbl_post ";
+				if (mysqli_query($this->conn,$query)) {
+					
+				}else{
+					echo "error";
+				}
+	}
 
 	private function helper($password)
 	{
