@@ -3,7 +3,9 @@ session_start();
 include('timeConvert.php');
 include('../Controller/User.php');
 include('../Controller/GetCommentData.php');
+include('../Controller/LikesComments.php');
 
+$like=new LikesComments();
 $post=new User();
 $viewPost=array_reverse(  $post->viewUserpost());
 
@@ -56,7 +58,16 @@ $comment=new CommentData();
     </div>
     <div class="panel-footer col-md-12">
                   <div class="col-md-1">
-                 <h5> <a href=""style="color:black;text-decoration: none"> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
+                 <h5>  <a href=<?php
+                    if (isset($_SESSION['user'])) {
+                       echo "/Controller/LikesComments.php?uname=".$_SESSION['user']."&&pid=".$post['pid']."&&from=main";
+                    }else
+                    {
+                       echo "/views/login"; 
+                    }
+                   ?>  
+
+                 style="color:black;text-decoration: none"> <i class="fas fa-thumbs-up" style="size: 20px"></i></a> <?php $like->getLikes($post['pid']); ?> </h5>
                 </div>
             
                 <div class="col-md-2"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
@@ -94,8 +105,17 @@ $comment=new CommentData();
    
    
       <div class="modal-body row">
-           <div class="col-md-1">
-                 <h5> <a href=""> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
+           <div class="col-md-2">
+              <h5>  <a href=<?php
+                    if (isset($_SESSION['user'])) {
+                       echo "/Controller/LikesComments.php?uname=".$_SESSION['user']."&&pid=".$post['pid']."&&from=modal";
+                    }else
+                    {
+                       echo "/views/login"; 
+                    }
+                   ?>  
+
+                 style="color:black;text-decoration: none"> <i class="fas fa-thumbs-up" style="size: 20px"></i></a> <?php $like->getLikes($post['pid']); ?> </h5>
                 </div>
          <div class="col-md-3"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
                            </div>

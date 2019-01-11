@@ -55,7 +55,9 @@ class User
 		
 		if(mysqli_query($this->conn,$query))
 		{
-			header('Location:/viewss');
+			$_SESSION['user']=$username;
+			header('Location:/views');
+
 		}else
 		{
 			echo "insert failed";

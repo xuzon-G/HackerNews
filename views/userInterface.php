@@ -25,6 +25,7 @@ foreach (  $route as $value) {
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
 
 			<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+			
 	
 		
 
@@ -60,12 +61,26 @@ foreach (  $route as $value) {
 										
 								 		?>
 										 
-									    <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown" style="color: white"><?php echo $_SESSION['user'];?>
+									  <!--  <a href="" class=" dropdown-toggle" type="button" data-toggle="dropdown" style="color: white"><?php echo $_SESSION['user'];?>
 									    <span class="caret"></span></a>
 									    <ul class="dropdown-menu">
 									      <li><a href="/views/logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
 									   
-									    </ul>
+									    </ul> -->
+									   
+  				<a class="dropdown-toggle" href="#"  id="dropdownMenuLink" data-toggle="dropdown" style="color: white">
+
+		 			<?php echo $_SESSION['user'];?> <span class="caret"></span></a>
+ 			
+
+							  <ul class="dropdown-menu">
+    
+   
+									      <li ><a href="/views/logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
+									   
+									
+										  </ul>
+
 								
 									<?php } else{?>
 
