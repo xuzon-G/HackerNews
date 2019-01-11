@@ -6,6 +6,7 @@ include('../Controller/GetCommentData.php');
 
 $post=new User();
 $viewPost=array_reverse(  $post->viewUserpost());
+
 $i=1;
 $comment=new CommentData();
 
@@ -55,7 +56,7 @@ $comment=new CommentData();
     </div>
     <div class="panel-footer col-md-12">
                   <div class="col-md-1">
-                 <h5> <a href=""> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
+                 <h5> <a href=""style="color:black;text-decoration: none"> <i class="fas fa-thumbs-up" style="size: 20px"></i></a></h5>
                 </div>
             
                 <div class="col-md-2"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
@@ -65,14 +66,16 @@ $comment=new CommentData();
                 </div>
             
                   <div class="col-md-2">
-                  <a style="color:black;text-decoration: none" href="" id="cmt_link_<?php echo $i; ?>" data-toggle="modal" data-target="#cmtModal<?php echo $i; ?>"><h6><i class="fas fa-comments" style="font-size:15px"></i> Comment</h6></a>
+                  <a style="color:black;text-decoration: none" href="" id="cmt_link_<?php echo $post['pid']; ?>" data-toggle="modal" data-target="#cmtModal<?php echo $post['pid']; ?>"><h6>
+                    <?php echo $comment->countComment($post['pid']); ?>
+                    <i class="fas fa-comments" style="font-size:15px"></i> Comment</h6></a> 
               </div>
       <div class="row">
       <hr>
   </div>
 
 <!-- Modal -->
-<div class="modal fade" id="cmtModal<?php echo $i; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cmtModal<?php echo $post['pid']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,7 +103,7 @@ $comment=new CommentData();
                      <h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $post['uname']; ?></h6>
                 </div>         
                   <div class="col-md-3">
-                  <h6><i class="fas fa-comments" style="font-size:15px"></i>Comment</h6>
+                  <h6>    <?php echo $comment->countComment($post['pid']); ?> <i class="fas fa-comments" style="font-size:15px"></i> Comment</h6>
               </div>
 
               <div class="col-md-12">
@@ -112,10 +115,10 @@ $comment=new CommentData();
                   
                         
             <div class="form-group">
-                   <textarea class="form-control" rows="3" id="comment" placeholder="your Comment" name="cmt" required=""></textarea>
+                   <textarea class="form-control" rows="2" id="comment" placeholder="your Comment" name="cmt" required=""></textarea>
                     <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
                     <input type="hidden" name="hid" value=<?php echo $post['pid']?>>
-                    <div class="co-md-12" style="margin-top: 5px"> <button type="submit" class="btn " name="user" value="asmtComment"  style="float: right;background-color:#222;color:white; ">Comment</button>
+                    <div class="co-md-2  col-md-offset-10" style="margin-top: 5px"> <button type="submit" class="btn " name="user" value="asmtComment"  style="background-color:#222;color:white; ">Comment</button>
                     </div>
 
 
@@ -127,8 +130,8 @@ $comment=new CommentData();
 
               </div>
       
-        <div class="container col-md-12  " style="background-color: #f5f5f5;margin-top: 5px">
-                     <?php $cmt=$comment->getData($post['pid']);
+        <div class="container col-md-12  " data-spy="scroll" style="background-color: #f5f5f5;margin-top: 5px;height: 400px;overflow: scroll;" >
+                     <?php $cmt=array_reverse($comment->getData($post['pid']));
                           foreach ($cmt as $key => $data) {
                         ?>
        
@@ -164,6 +167,6 @@ $comment=new CommentData();
   <?php
     if(isset($_REQUEST['post']))
     {
-        echo "<script> document.getElementById('cmt_link_".$post['pid']."').click() </script>";
+        echo "<script> document.getElementById('cmt_link_".$_REQUEST['post']."').click() </script>";
     }
   ?>
