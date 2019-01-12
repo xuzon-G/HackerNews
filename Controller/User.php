@@ -26,11 +26,14 @@ if (isset($_POST['user'])) {
 		break;
 
 		case 'Post':
-				if (isset($_FILES))
-				$user->imagePost($_POST['uname'],$_POST['postDetail'],$_FILES);
-				else
-				$user->userPost($_POST['uname'],$_POST['postDetail']);
-			break;
+				if (($_FILES['UploadImage']['size']!=0)){
+				$user->imagePost($_POST['uname'],$_POST['postDetail'],$_FILES);	
+				}
+				
+				else{ 
+				 $user->userPost($_POST['uname'],$_POST['postDetail']);
+				}
+		
 	}
 }
 
@@ -125,7 +128,7 @@ class User
 
 	}
 
-	public function userPost($uname,$post,$file)
+	public function userPost($uname,$post)
 	{
 		
 		$query="Insert into tbl_post SET uname='".$uname."',
@@ -149,16 +152,21 @@ class User
 		if ($this->checkImage($file)) {
 			$path='../assets/';
 			
-			
-			move_uploaded_file($_FILES["UploadImage"]["tmp_name"], $path.$_FILES['UploadImage']['name']);
+			$newfilename= date('dmYHis');
+			$ext = pathinfo($file['UploadImage']['name'], PATHINFO_EXTENSION);
+			$newfilename=$newfilename.".".$ext;
+		
+		
+
+			move_uploaded_file($file["UploadImage"]["tmp_name"], $path.$newfilename);
 
 			$query="Insert into tbl_post SET uname='".$uname."',
 											created_at=".Time().",
-											image='".$file['UploadImage']['tmp_name']."',
+											image='".$newfilename."',
 											post='".$post."'";
 
 											
-								echo $query;
+						
 											
 					
 		
@@ -187,7 +195,9 @@ class User
 					
 				
 			}
-				return $data;
+				
+				return ($data);
+			
 			
 	}
 

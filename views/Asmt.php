@@ -14,7 +14,8 @@ $comment=new CommentData();
 
 ?>
 
-<div class="container" style="width: 80%">
+<div class="container" style="width: 60%;height: 650px;overflow: scroll"  >
+    <div class="col-md-12 container">
 	<div class="row" style="border:1px solid ">
 			        <form class="form"  enctype="multipart/form-data" method="post" action=<?php if (isset($_SESSION['user'])){
                         echo "/Controller/User.php";
@@ -23,9 +24,13 @@ $comment=new CommentData();
 			        	
             <div class="form-group">
               <div class="row">
+
+
                 <div class="col-md-12">
-                      <textarea class="form-control" rows="3" id="comment" placeholder="POST YOUR THOUGHTS" name="postDetail" required=""></textarea> 
+                      <textarea id="postText" class="form-control" rows="3" id="comment" placeholder="POST YOUR THOUGHTS" name="postDetail" required=""></textarea> 
                 </div>
+
+
                 <div class="col-md-12" style="margin-top:5px">
                     <div class="col-md-4"><label>Upload Image:</label><input type="file" name="UploadImage" id="fileToUpload">    </div>
                     <div class="col-md-8">
@@ -63,7 +68,29 @@ $comment=new CommentData();
    
     <div class="panel-body">
         
-            <h4>  <?php echo $post['post'];?>   </h4>
+         
+
+<!-- This is image section-->
+<?php
+if ($post['image']) {?>
+    <div class="col-md-12">
+    <div class="col-md-12">
+           <h4>  <?php echo $post['post'];?>   </h4>
+    </div>
+        <div class="col-md-12" style="width:100%;">
+            <img src=<?php echo "../assets/".$post['image'];?> class="img img-responsive">
+        </div>
+    </div>
+
+<?php }else{?>
+   <h4>  <?php echo $post['post'];?>   </h4>
+<?php }?>
+
+<!-- image section ends -->
+
+
+
+
      
     </div>
     <div class="panel-footer col-md-12">
@@ -96,7 +123,7 @@ $comment=new CommentData();
   </div>
 
 <!-- Modal -->
-<div class="modal fade" id="cmtModal<?php echo $post['pid']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cmtModal<?php echo $post['pid']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-height:800px">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -107,7 +134,21 @@ $comment=new CommentData();
         </button>
         </div>
         <div class="col-md-12">
-             <h4 class="modal-title" id="exampleModalLabel"> <?php echo $post['post'];?> </h4>
+             
+                        <?php
+                        if ($post['image']) {?>
+                            <div class="col-md-12" >
+                            <div class="col-md-12">
+                                   <h4>  <?php echo $post['post'];?>   </h4>
+                            </div>
+                                <div class="col-md-12" >
+                                    <img src=<?php echo "../assets/".$post['image'];?> class="img img-responsive" >
+                                </div>
+                            </div>
+
+                        <?php }else{?>
+                           <h4>  <?php echo $post['post'];?>   </h4>
+                        <?php }?>
         </div>
        
      
@@ -148,6 +189,8 @@ $comment=new CommentData();
                    <textarea class="form-control" rows="2" id="comment" placeholder="your Comment" name="cmt" required=""></textarea>
                     <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
                     <input type="hidden" name="hid" value=<?php echo $post['pid']?>>
+
+
                     <div class="co-md-2  col-md-offset-10" style="margin-top: 5px"> <button type="submit" class="btn " name="user" value="asmtComment"  style="background-color:#222;color:white; ">Comment</button>
                     </div>
 
@@ -159,10 +202,12 @@ $comment=new CommentData();
 
 
               </div>
-      
-        <div class="container col-md-12  " data-spy="scroll" style="background-color: #f5f5f5;margin-top: 5px;height: 400px;overflow: scroll;" >
-                     <?php $cmt=array_reverse($comment->getData($post['pid']));
-                          foreach ($cmt as $key => $data) {
+       <?php $cmt=array_reverse($comment->getData($post['pid']));?>
+        <div class="container col-md-12 "  data-spy="scroll" style="background-color: #f5f5f5;margin-top: 5px;max-height:<?php if ($cmt) {
+            echo "200px;";
+        }else{ echo "0px"; }?>;min-height:0px;overflow: scroll;" >
+                    
+                         <?php foreach ($cmt as $key => $data) {
                         ?>
        
               
@@ -170,7 +215,7 @@ $comment=new CommentData();
                 <b><?php echo TimeConvert::get_time_ago($data['created_at'])." ".$data['uname'];?></b></br> 
                 </div>
                 <div class="col-md-12">
-                <p><?php echo $data['data']; ?> </p>   
+                <p style="padding-left: 20px"><?php echo $data['data']; ?> </p>   
                 </div>
            
             <?php }?>
@@ -193,6 +238,7 @@ $comment=new CommentData();
 
    <?php $i++;} ?>
 </div>
+</div>
 
   <?php
     if(isset($_REQUEST['post']))
@@ -200,3 +246,12 @@ $comment=new CommentData();
         echo "<script> document.getElementById('cmt_link_".$_REQUEST['post']."').click() </script>";
     }
   ?>
+<script type="text/javascript">
+    
+
+$("#postText").emojioneArea({
+    pickerPosition:"bottom"
+});
+
+
+</script>

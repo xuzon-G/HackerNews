@@ -12,7 +12,7 @@ $routeName=strtolower($routeName);
 <div class="row">
 	<div class="col-md-2">
 		<div id="navBar">
-			<ul>
+			<ul style="background-color:#222">
 				<li><a href="/views/home/NewStories" >New Stories</a></li>
 				<li><a href="/views/TopStories"> Top Stories</a></li>
 				<li><a href="/views/BestStories">Best Stories</a></li>

@@ -12,7 +12,7 @@ foreach (  $route as $value) {
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
+			<meta charset="UTF-8">
 		<title>Document</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -25,27 +25,31 @@ foreach (  $route as $value) {
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
 
 			<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-			
+			<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Press+Start+2P|Zilla+Slab" rel="stylesheet"> 
+			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css
+">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js" ></script>
+						
 	
-		
+		<meta charset="utf-8">
 
 	</head>
 	<body>
 			<div class="container-fluid" >
 			<div class="row">
-				<div class="col-md-12 " style="">
+				<div class="col-md-12 " ">
 					<nav class="navbar navbar-inverse" style="
 						box-shadow: 0px 0px 8px #888888;">
 						<div class="container-fluid">
-							<div class="navbar-header">
+							<div class="navbar-header"style="font-family: 'Press Start 2P', cursive;">
 								  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         							<span class="icon-bar"></span>
         							<span class="icon-bar"></span>
        								 <span class="icon-bar"></span>
     								  </button>
-								<a class="navbar-brand" href="#">HackerNews</a>
+								<a class="navbar-brand" href="#" ">Tech-News</a>
 							</div>
-							 <div class="collapse navbar-collapse" id="myNavbar">
+							 <div class="collapse navbar-collapse" id="myNavbar" style="font-family: 'Black Ops One', cursive;">
 							<ul class="nav navbar-nav" style="float: right ;margin-right: 30px" >
 								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home">Home</a></li>
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
