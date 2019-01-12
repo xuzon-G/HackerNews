@@ -15,17 +15,27 @@ $comment=new CommentData();
 ?>
 
 <div class="container" style="width: 80%">
-	<div class="row">
-			        <form class="form" role="form" method="post" action=<?php if (isset($_SESSION['user'])){
+	<div class="row" style="border:1px solid ">
+			        <form class="form"  enctype="multipart/form-data" method="post" action=<?php if (isset($_SESSION['user'])){
                         echo "/Controller/User.php";
                     }else { echo "/views/login";} ?> >
 			      
 			        	
             <div class="form-group">
-                   <textarea class="form-control" rows="3" id="comment" placeholder="POST YOUR THOUGHTS" name="postDetail" required=""></textarea>
-                    <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
-                    <div class="co-md-12" style="margin-top: 5px"> <input type="submit" class="btn " name="user" value="Post"  style="float: right;background-color:#222;color:white; ">
+              <div class="row">
+                <div class="col-md-12">
+                      <textarea class="form-control" rows="3" id="comment" placeholder="POST YOUR THOUGHTS" name="postDetail" required=""></textarea> 
+                </div>
+                <div class="col-md-12" style="margin-top:5px">
+                    <div class="col-md-4"><label>Upload Image:</label><input type="file" name="UploadImage" id="fileToUpload">    </div>
+                    <div class="col-md-8">
+                          <input type="hidden" name="uname" style="display: none" value=<?php echo $_SESSION['user']; ?>>
+                    <input type="submit" class="btn " name="user" value="Post"  style="float: right;background-color:#222;color:white; ">
                     </div>
+                      
+                  
+                </div>
+                  </div>
 
 
              </div>

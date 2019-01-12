@@ -26,6 +26,9 @@ if (isset($_POST['user'])) {
 		break;
 
 		case 'Post':
+				if (isset($_FILES))
+				$user->imagePost($_POST['uname'],$_POST['postDetail'],$_FILES);
+				else
 				$user->userPost($_POST['uname'],$_POST['postDetail']);
 			break;
 	}
@@ -122,7 +125,7 @@ class User
 
 	}
 
-	public function userPost($uname,$post)
+	public function userPost($uname,$post,$file)
 	{
 		
 		$query="Insert into tbl_post SET uname='".$uname."',
@@ -141,6 +144,36 @@ class User
 		}
 
 	}
+		public function imagePost($uname,$post,$file)
+	{
+		if ($this->checkImage($file)) {
+			$path='../assets/';
+			
+			
+			move_uploaded_file($_FILES["UploadImage"]["tmp_name"], $path.$_FILES['UploadImage']['name']);
+
+			$query="Insert into tbl_post SET uname='".$uname."',
+											created_at=".Time().",
+											image='".$file['UploadImage']['tmp_name']."',
+											post='".$post."'";
+
+											
+								echo $query;
+											
+					
+		
+		if(mysqli_query($this->conn,$query))
+		{
+			header('Location:/views/Asmt');
+		}else
+		{
+			echo "insert failed";
+		}
+		}
+	}
+
+
+
 	public function viewUserPost()
 	{
 				$queryPost="Select *from tbl_post ";
@@ -191,6 +224,20 @@ public function asmtComment($uname,$cmt,$hid)
 	private function helper($password)
 	{
 		return hash("SHA256", $password);
+	}
+
+
+	public function checkImage($file)
+	{
+			$allowed =  array('gif','png' ,'jpg');
+			$filename = $_FILES['UploadImage']['name'];
+			$ext = pathinfo($filename, PATHINFO_EXTENSION);
+
+			if(!in_array($ext,$allowed) ) {
+ 			   echo 'Please  upload images only';
+				}else
+				return true;
+
 	}
 }
 
