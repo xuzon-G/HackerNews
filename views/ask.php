@@ -41,7 +41,7 @@
 	?>
 
 	
-		<div class="col-md-12" style="overflow: hidden; border:1px solid #888888;margin-top:2px;border-left-style: none;border-right-style: none">
+		<div class="col-md-12 container" style="overflow: hidden; border:1px solid #888888;margin-top:2px;">
 				<div class="row">
 				<div class="col-md-12">
 					<h4><b><?php echo $askData['title']; ?></b></h4>

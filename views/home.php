@@ -30,15 +30,21 @@
 					$obj=new MetaData();
 					$c = curl_init();
 					curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-					for($i=0;$i<=20;$i++){
+					$range  = array(start=>0,end=>4);
+					if(isset($_GET['page'])){
+						$range["start"]= ($_GET['page']-1)*5;
+						$range['end']= (($_GET['page'])*5)-1;
+					}
+					for($i=$range['start'];$i<=$range['end'];$i++){
 						$item = $returnData[$i];
 						$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json";
 						curl_setopt($c, CURLOPT_URL, $url);
 						$ret= json_decode(curl_exec($c),true);
-						if ($i<=1) {
+						if ($i<=$range['start']+1) {
+							
 							 $detail = $obj->getMetaData($ret['url']);
-						 $image=$detail['image'];
-						 $desc=$detail['desc'];
+							 $image=$detail['image'];
+							 $desc=$detail['desc'];
 						}else {
 							unset($image);
 							unset($desc);
@@ -51,7 +57,7 @@
 			    ?>
 
 			    <?php
-			    	if ($i<=1) {
+			    	if ($i<=$range['start']+1) {
 			    	?>
 			    	<div class="col-md-6" style="box-shadow: 0px 0px 2px #888888;overflow: hidden;height: 600px"  >
 				

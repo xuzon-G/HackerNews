@@ -46,7 +46,9 @@ class NewsCategories
 						curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 						curl_setopt($c, CURLOPT_URL, $url);
 						$returnData = json_decode(curl_exec($c),true);
+						echo count($returnData);
 						$returnData = implode("-",$returnData);
+
 						$_SESSION['list'] = $returnData;
 						curl_close($c);
 					
