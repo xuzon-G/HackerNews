@@ -4,26 +4,43 @@ $route = $_SERVER["REQUEST_URI"];
 $route = explode("/",$route);
 
 $routeName= $route[count($route)-1];
-$routeName=strtolower($routeName); 
+
+
+ if (!empty(substr($routeName,0, strpos($routeName, "?")))) {
+ 	$routeName=substr($routeName,0, strpos($routeName, "?"));
+ }
+ $pagePath= $routeName;
+
+ $routeName=strtolower($routeName); 
+
+if ($routeName=="newstories")
+	$category="New Stories";
+if ($routeName=="topstories")
+	$category="Top Stories";
+if ($routeName=="beststories")
+	$category="Best Stories";
+
 
 ?>
 
 
 <div class="row">
 	<div class="col-md-2">
-		<div id="navBar">
-			<ul style="background-color:#222">
+		<div id="navBar" style="font-family: 'Black Ops One', cursive;">
+			<ul style="background-color:#222;color:#9898;border-radius:5px 5px 0px 0px;">
 				<li><a href="/views/home/NewStories" >New Stories</a></li>
 				<li><a href="/views/TopStories"> Top Stories</a></li>
 				<li><a href="/views/BestStories">Best Stories</a></li>
 				
 			</ul>
 		</div>
+			<div class="col-md-12 container-fluid" >
+		<h3><?php echo $category;  ?> <i class="fas fa-angle-double-right"></i></h3> 
+		</div>
 	</div>
 	<div class="col-md-10" >
-		<div class="col-md-12 container-fluid" style="background-color: black">
-		<h3><?php echo $routeName;?></h3> 
-		</div>
+
+
 		<div class="row container-fluid">
 
 <?php
@@ -46,7 +63,7 @@ class NewsCategories
 						curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 						curl_setopt($c, CURLOPT_URL, $url);
 						$returnData = json_decode(curl_exec($c),true);
-						echo count($returnData);
+
 						$returnData = implode("-",$returnData);
 
 						$_SESSION['list'] = $returnData;
@@ -56,12 +73,22 @@ class NewsCategories
 					$obj=new MetaData();
 					$c = curl_init();
 					curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-					for($i=0;$i<=20;$i++){
+					// range start
+							$range=array("start"=>0,"end"=>4);
+							if (isset($_GET['page'])) {
+								$range['start']=($_GET['page']-1)*5;
+								$range['end']=($_GET['page']*5)-1;
+							}
+					// range ends
+
+
+
+					for($i=$range['start'];$i<=$range['end'];$i++){
 						$item = $returnData[$i];
 						$url = "https://hacker-news.firebaseio.com/v0/item/".$item.".json";
 						curl_setopt($c, CURLOPT_URL, $url);
 						$ret= json_decode(curl_exec($c),true);
-						if ($i<=1) {
+						if ($i<=$range['start']+1) {
 							 $detail = $obj->getMetaData($ret['url']);
 						 $image=$detail['image'];
 						 $desc=$detail['desc'];
@@ -77,7 +104,7 @@ class NewsCategories
 			    ?>
 					
 			    <?php
-			    	if ($i<=1) {
+			    	if ($i<=$range['start']+1) {
 			    	?>
 			    	<div class="col-md-6" style="box-shadow: 0px 0px 2px #888888;overflow: hidden;height: 600px"  >
 				
@@ -87,9 +114,9 @@ class NewsCategories
 						<div class="col-md-12">
 							<?php if (isset($image)) { ?>
 							 
-							<img style="height:400px;s" class="img-responsive " src=<?php echo "'".$image."'"; ?>  >
+							<img style="height:380px;padding-bottom: 10px;padding-top: 10px" class="img-responsive " src=<?php echo "'".$image."'"; ?>  >
 							 <?php }else {?>
-							 	<img src="/assets/noimage.gif" class="img-responsive " style="height: 400px;">
+							 	<img src="/assets/noimage.gif" class="img-responsive " style="height: 380px;padding-top: 10px;padding-bottom: 10px">
 							 <?php }?> 
 						</div>
 					</div>	
@@ -198,6 +225,34 @@ class NewsCategories
 
 
 ?>
+
+		<!-- pagination start -->
+	<div class="row container-fluid">
+		<nav style="">
+  		<ul class="pagination pg-blue">
+  		
+    	<li class="page-item <?php if(!isset($_GET['page'])){echo "disabled" ;}?>">
+     	 <a class="page-link" tabindex="-1" href=<?php echo "/views/".$pagePath."?page=".($_GET['page']+1) ; ?>>Previous</a>
+   		 </li>
+			<?php
+				for ($i=1; $i <=9 ; $i++) { ?>
+
+						<li class="page-item <?php if($i==$_GET['page']){ echo "active";} ?>"><a class="page-link " href=<?php echo "/views/".$pagePath."?page=".$i; ?>><?php echo $i; ?></a></li>
+
+
+				<?php }
+			?>
+   		 
+    	
+    
+    <li class="page-item">
+      <a class="page-link" href=<?php echo "/views/".$pagePath."?page=".($_GET['page']+1) ;?>>Next</a>
+    </li>
+  </ul>
+</nav>
+	</div>
+	<!-- pagination end -->
 </div>
 </div>
 </div>
+

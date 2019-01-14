@@ -34,10 +34,10 @@ foreach (  $route as $value) {
 		<meta charset="utf-8">
 
 	</head>
-	<body>
+	<body >
 			<div class="container-fluid" >
 			<div class="row">
-				<div class="col-md-12 " ">
+				<div class="col-md-12 " >
 					<nav class="navbar navbar-inverse" style="
 						box-shadow: 0px 0px 8px #888888;">
 						<div class="container-fluid">
@@ -51,11 +51,11 @@ foreach (  $route as $value) {
 							</div>
 							 <div class="collapse navbar-collapse" id="myNavbar" style="font-family: 'Black Ops One', cursive;">
 							<ul class="nav navbar-nav" style="float: right ;margin-right: 30px" >
-								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home">Home</a></li>
-								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job">Job</a></li>
-								<li class=<?php if ($path=="ask") { echo "active";}else{ echo "";}?>><a href="/views/ask">Ask</a></li>
-								<li class=<?php if ($path=="shows") { echo "active";}else{ echo "";}?>><a href="/views/shows">Show</a></li>
-								<li class=<?php if ($path=="Asmt") { echo "active";}else{ echo "";}?>><a href="/views/Asmt">ASMT</a></li>
+
+								<li class=<?php if ($path=="Asmt") { echo "active";}else{ echo "";}?>><a href="/views/Asmt"><i class="fas fa-graduation-cap"></i> ASMT </a></li>
+								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home"><i class="fab fa-hacker-news-square"></i> News Feed</a></li>
+								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job"><i class="fas fa-briefcase"></i> Job </a></li>
+								
 								
 								<li class="login">
 
@@ -72,7 +72,7 @@ foreach (  $route as $value) {
 									   
 									    </ul> -->
 									   
-  				<a class="dropdown-toggle" href="#"  id="dropdownMenuLink" data-toggle="dropdown" style="color: white">
+  				<a class="dropdown-toggle" href="#"  id="dropdownMenuLink" data-toggle="dropdown" style="color: white"><i class="fas fa-user-circle"></i>
 
 		 			<?php echo $_SESSION['user'];?> <span class="caret"></span></a>
  			

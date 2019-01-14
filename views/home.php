@@ -1,14 +1,17 @@
 <!-- <link rel="stylesheet" type="text/css" href="/assets/style.css"> -->
 
 <div class="row" >
-	<div class="col-md-2">
-		<div id="navBar">
-			<ul style="background-color:#222">
-				<li><a href="/views/home/NewStories" >New Stories</a></li>
-				<li><a href="/views/TopStories"> Top Stories</a></li>
-				<li><a href="/views/BestStories">Best Stories</a></li>
+		<div class="col-md-2">
+		<div id="navBar" style="font-family: 'Black Ops One', cursive;">
+			<ul style="background-color:#222;color:#9898;border-radius:5px 5px 0px 0px;">
+				<li><a href="/views/home/NewStories?title=NEW%20STORIES" >New Stories</a></li>
+				<li><a href="/views/TopStories?title=TOP%20STORIES" > Top Stories</a></li>
+				<li><a href="/views/BestStories?title=BEST%20STORIES">Best Stories</a></li>
 				
 			</ul>
+		</div>
+			<div class="col-md-12 container-fluid" >
+		<h3><?php  echo $_GET['title']; ?> <i class="fas fa-angle-double-right"></i></h3> 
 		</div>
 	</div>
 	<div class="col-md-10" >
@@ -41,7 +44,7 @@
 						curl_setopt($c, CURLOPT_URL, $url);
 						$ret= json_decode(curl_exec($c),true);
 						if ($i<=$range['start']+1) {
-							
+
 							 $detail = $obj->getMetaData($ret['url']);
 							 $image=$detail['image'];
 							 $desc=$detail['desc'];
@@ -64,19 +67,19 @@
 					
 						
 				<div class="row" >
-						<div class="col-md-12">
+						<div class="col-md-12 ">
 							<?php if (isset($image)) { ?>
 							 
-							<img style="height:400px;s" class="img-responsive " src=<?php echo "'".$image."'"; ?>  >
+							<img style="height:380px;padding-top: 10px" class="img-responsive img-rounded" src=<?php echo "'".$image."'"; ?>  >
 							 <?php }else {?>
-							 	<img src="/assets/noimage.gif" class="img-responsive " style="height: 400px;">
+							 	<img src="/assets/noimage.gif" class="img-responsive img-rounded" style="height: 380px;padding-top: 10px;padding-bottom: 10px">
 							 <?php }?> 
 						</div>
 					</div>	
 					
 		
-					<div class="row">
-					<div class="col-md-9" style="font-size:11pt">
+					<div class="row" >
+					<div class="col-md-9 " style="font-size:11pt;">
 						<div class="col-md-12">
 							<h4><b><?php echo $ret['title']; ?></b></h4>
 								<?php if (isset($desc)) {
