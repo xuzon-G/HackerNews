@@ -32,9 +32,9 @@ if ($routeName!='api') {
 session_start();
 class path
 {
-	function home()
+	function feed()
 	{
-		include("home.php");
+		include("newsfeed.php");
 	}
 	function job()
 	{
@@ -74,8 +74,8 @@ class path
 $p = new path();
 switch($routeName)
 {
-	case "home":
-		$p->home();
+	case "newsfeed":
+		$p->feed();
 		break;
 	case "job":
 		$p->job();

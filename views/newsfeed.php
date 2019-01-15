@@ -1,5 +1,31 @@
 <!-- <link rel="stylesheet" type="text/css" href="/assets/style.css"> -->
 
+
+<?php
+ 
+$route = $_SERVER["REQUEST_URI"];
+$route = explode("/",$route);
+
+$routeName= $route[count($route)-1];
+
+
+ if (!empty(substr($routeName,0, strpos($routeName, "?")))) {
+ 	$routeName=substr($routeName,0, strpos($routeName, "?"));
+ }
+ $pagePath= $routeName;
+
+ $routeName=strtolower($routeName); 
+
+if ($routeName=="newstories")
+	$category="New Stories";
+if ($routeName=="topstories")
+	$category="Top Stories";
+if ($routeName=="beststories")
+	$category="Best Stories";
+
+
+?>
+
 <div class="row" >
 		<div class="col-md-2">
 		<div id="navBar" style="font-family: 'Black Ops One', cursive;">
@@ -172,6 +198,37 @@
 
 								<?php } }
 					?>
+
+
+				<!-- pagination start -->
+	<div class="row container-fluid">
+		<nav style="">
+  		<ul class="pagination pg-black">
+  		
+    	<li class="page-item <?php if(!isset($_GET['page'])){echo "disabled" ;}?>">
+     	 <a class="page-link" tabindex="-1" href=<?php echo "/views/".$pagePath."?page=".($_GET['page']+1) ; ?>>Previous</a>
+   		 </li>
+			<?php
+				for ($i=1; $i <=9 ; $i++) { ?>
+
+						<li class="page-item <?php if($i==$_GET['page']){ echo "active";} ?>"><a class="page-link " href=<?php echo "/views/".$pagePath."?page=".$i; ?>><?php echo $i; ?></a></li>
+
+
+				<?php }
+			?>
+   		 
+    	
+    
+    <li class="page-item">
+      <a class="page-link" href=<?php echo "/views/".$pagePath."?page=".($_GET['page']+1) ;?>>Next</a>
+    </li>
+  </ul>
+</nav>
+	</div>
+	<!-- pagination end -->
+
+
+
 				</div>
 			</div>
 		</div>

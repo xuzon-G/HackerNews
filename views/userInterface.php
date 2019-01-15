@@ -53,7 +53,7 @@ foreach (  $route as $value) {
 							<ul class="nav navbar-nav" style="float: right ;margin-right: 30px" >
 
 								<li class=<?php if ($path=="Asmt") { echo "active";}else{ echo "";}?>><a href="/views/Asmt"><i class="fas fa-graduation-cap"></i> ASMT </a></li>
-								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/home"><i class="fab fa-hacker-news-square"></i> News Feed</a></li>
+								<li class=<?php if ($path=="home"||$path=="views") { echo "active";}?>><a href="/views/newsfeed"><i class="fab fa-hacker-news-square"></i> News Feed</a></li>
 								<li class=<?php if ($path=="job") { echo "active";}else{ echo "";}?>><a href="/views/job"><i class="fas fa-briefcase"></i> Job </a></li>
 								
 								
