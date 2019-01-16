@@ -36,9 +36,7 @@ if ($routeName=="beststories")
 				
 			</ul>
 		</div>
-			<div class="col-md-12 container-fluid" >
-		<h3><?php  echo $_GET['title']; ?> <i class="fas fa-angle-double-right"></i></h3> 
-		</div>
+		
 	</div>
 	<div class="col-md-10" >
 		<div class="row container-fluid">

@@ -102,6 +102,10 @@ switch($routeName)
 		$p->newsCategories();
 		break;
 
+	default:
+				$p->asmt();
+		break;
+
 
 }
 
