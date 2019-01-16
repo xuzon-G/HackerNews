@@ -18,7 +18,7 @@ $comment=new CommentData();
     <div class="col-md-12 container">
 	<div class="row" style="border:1px solid ">
 			        <form class="form"  enctype="multipart/form-data" method="post" action=<?php if (isset($_SESSION['user'])){
-                        echo "/Controller/User.php";
+                        echo htmlspecialchars('/Controller/User.php');
                     }else { echo "/views/login";} ?> >
 			      
 			        	
@@ -83,7 +83,7 @@ if ($post['image']) {?>
     </div>
 
 <?php }else{?>
-   <h4>  <?php echo $post['post'];?>   </h4>
+   <h4>  <?php echo strip_tags($post['post']);?>   </h4>
 <?php }?>
 
 <!-- image section ends -->

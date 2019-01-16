@@ -68,7 +68,7 @@ include('metaData.php');
 			 <hr style="size: 5px">
 		<div class="row">
 			        <form class="form" role="form" method="post" action=<?php if (isset($_SESSION['user'])){
-			        	echo "/Controller/User.php";
+			        	 echo htmlspecialchars('/Controller/User.php');
 			        }else { echo "/views/login";} ?>>
 			        	  <input type="hidden" name="uname" value=<?php echo $_SESSION['user'];?>>
 			        	  	  <input type="hidden" name="hid" value=<?php echo $sid?>>
