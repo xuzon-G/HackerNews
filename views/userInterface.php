@@ -29,6 +29,7 @@ foreach (  $route as $value) {
 			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css
 ">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="/assets/style.css"> 
 						
 	
 		<meta charset="utf-8">

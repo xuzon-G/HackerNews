@@ -1,4 +1,4 @@
-<!-- <link rel="stylesheet" type="text/css" href="/assets/style.css"> -->
+<link rel="stylesheet" type="text/css" href="/assets/style.css"> 
 
 
 <?php
@@ -201,7 +201,7 @@ if ($routeName=="beststories")
 				<!-- pagination start -->
 	<div class="row container-fluid">
 		<nav style="">
-  		<ul class="pagination pg-black">
+  		<ul class="pagination " >
   		
     	<li class="page-item <?php if(!isset($_GET['page'])){echo "disabled" ;}?>">
      	 <a class="page-link" tabindex="-1" href=<?php echo "/views/".$pagePath."?page=".($_GET['page']+1) ; ?>>Previous</a>

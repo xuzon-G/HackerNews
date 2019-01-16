@@ -41,3 +41,15 @@
     background-color: #555;
     color: white;
 }
+
+.pagination li a 
+{
+  color:black;
+
+
+}
+.paination li a:visited:active
+{
+  color: white;
+  background-color: black;
+}
