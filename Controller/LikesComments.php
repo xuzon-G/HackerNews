@@ -3,7 +3,6 @@
 /**
  * 
  */
-
 if(isset($_REQUEST['pid'])) {
 	$like=new LikesComments();
 	$like->likePost($_REQUEST['uname'],$_REQUEST['pid'],$_REQUEST['from']);

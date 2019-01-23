@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+
+include('/Controller/User.php');
 if (isset($_SESSION['user'])) {
  header('location:/views/home');
  }
@@ -39,18 +42,19 @@ if (isset($_SESSION['user'])) {
                         </form> 
                     </div>
                     <div class="tab-pane fade" id="create" style="margin-top: 10px">
-                       <form action="/Controller/User.php" id="tab" method="POST">
+                       <form action=<?php echo $_SERVER["PHP_SELF"];?> id="tab" method="POST" onsubmit="return validateForm();">
                         <div class="form-group">
                           <label for="Username">Username:</label>
-                          <input type="text" class="form-control" id="uanme" name="uname">
+                          <input type="text" class="form-control" id="cuname" name="uname">
+                          <label id="err_uname"></label>
                         </div>
                         <div class="form-group">
                           <label for="email">Email:</label>
-                          <input type="email" class="form-control" id="pwd" name="email">
+                          <input type="email" class="form-control" id="cemail" name="email">
                         </div>
                         <div class="form-group">
                           <label for="pwd">Password:</label>
-                          <input type="password" class="form-control" id="pwd" name="password">
+                          <input type="password" class="form-control" id="cpwd" name="password">
                         </div>
                        
                         <input type="submit" class="btn btn-default" name="user" value="Create">
@@ -64,3 +68,14 @@ if (isset($_SESSION['user'])) {
 </div>
 
 <?php }?>
+<script>
+function validateForm()
+{
+var uname=document.getElementById('cuname').value;
+if(!uname)
+{
+ document.getElementById('err_uname').innerText="Uname is Required";
+ return false;
+}
+}
+</script>

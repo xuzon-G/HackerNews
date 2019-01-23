@@ -44,6 +44,9 @@ if ($routeName=="beststories")
 				$route = $_SERVER["REQUEST_URI"];
 			include ('metaData.php');
 			include_once('timeConvert.php');
+			include('../Controller/GetCommentData.php');
+	
+
 						$url = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty";
 						$c = curl_init();
 						curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
@@ -80,6 +83,11 @@ if ($routeName=="beststories")
 					
 						$time=new TimeConvert();
 						$timeFormat=$time->get_time_ago($ret['time']);
+						$localCmtObj= new CommentData();
+						$localCmt=array_reverse($localCmtObj->getData($item));
+						
+						$localCmtCount=count($localCmt);
+					
 						
 			    ?>
 
@@ -127,15 +135,15 @@ if ($routeName=="beststories")
 							<div class="col-md-12" style="color: #98999f">
 							
 								<?php
-								if ($ret['descendants']>0) {
+								if ($ret['descendants']+$localCmtCount>0) {
 								?>
-								<a href=<?php echo "/views/comments?id=".$item;?>> <i class="fas fa-comments" style="font-size:15px" ></i></a>
+								<a href=<?php echo "/views/comments?id=".$item;?>> <?php echo $ret['descendants']+$localCmtCount;?> <i class="fas fa-comments" style="font-size:15px" ></i></a>
 								
 								<?php }else {?>
-								<i class="fas fa-comments" style="font-size:15px"></i>
+									<?php echo $ret['descendants']+$localCmtCount;?> <i class="fas fa-comments" style="font-size:15px"></i>
 								
 								<?php }?>
-									<?php echo $ret['descendants']." ";?>
+								
 							</div>
 							
 						</div>
@@ -169,11 +177,11 @@ if ($routeName=="beststories")
 								<h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $ret['by']; ?></h6>
 							</div>
 							<div class="col-md-12" style="color: #98999f">
-								<h6><?php echo $ret['descendants']." ";?>
+								<h6><?php echo $ret['descendants']+$localCmtCount." ";?>
 								<?php
-								if ($ret['descendants']>0) {
+								if ($ret['descendants']+$localCmtCount>0) {
 								?>
-								<a href=<?php echo "/views/comments?id=".$item;?>> <i class="fas fa-comments" style="font-size:15px" ></i></a></h6>
+								<a href=<?php echo "/views/comments?id=".$item;?>>  <i class="fas fa-comments" style="font-size:15px" ></i></a></h6>
 								
 								<?php }else {?>
 								<i class="fas fa-comments" style="font-size:15px"></i></h6>

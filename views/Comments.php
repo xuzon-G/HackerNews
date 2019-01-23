@@ -30,8 +30,7 @@ include('metaData.php');
 			$localCmt=array_reverse($localCmtObj->getData($sid));
 			
 			$localCmtCount=count($localCmt);
-			echo $localCmtCount."<br>";
-			 echo $returnCmt['descendants'];
+		
 		
 			$time=new TimeConvert();
 		

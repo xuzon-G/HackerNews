@@ -9,10 +9,12 @@ if (isset($_POST['user'])) {
 	$userInfo=$_POST['user'];
 	switch ($userInfo) {
 		case 'Login':
+			
 			$user->loginUser($_POST['uname'],$_POST['password']);
 			break;
 		
 		case 'Create':
+			$user->validateForm($_POST['uname'],$_POST['email'],$_POST['password']);
 			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password']);
 			break;
 
@@ -248,6 +250,13 @@ public function asmtComment($uname,$cmt,$hid)
 				}else
 				return true;
 
+	}
+	public function validateForm($uname ,$email ,$password)
+	{
+			if(empty($uname))
+			{
+
+			}
 	}
 }
 
