@@ -46,7 +46,7 @@ if (isset($_SESSION['user'])) {
                         <div class="form-group">
                           <label for="Username">Username:</label>
                           <input type="text" class="form-control" id="cuname" name="uname">
-                          <label id="err_uname"></label>
+                          <p id="err_uname" class=""></p>
                         </div>
                         <div class="form-group">
                           <label for="email">Email:</label>
@@ -55,6 +55,11 @@ if (isset($_SESSION['user'])) {
                         <div class="form-group">
                           <label for="pwd">Password:</label>
                           <input type="password" class="form-control" id="cpwd" name="password">
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Confirm Password:</label>
+                          <input type="password" class="form-control" id="cfmpwd" name="password">
+                          <p id="err_pwd" class=""></p>
                         </div>
                        
                         <input type="submit" class="btn btn-default" name="user" value="Create">
@@ -68,14 +73,4 @@ if (isset($_SESSION['user'])) {
 </div>
 
 <?php }?>
-<script>
-function validateForm()
-{
-var uname=document.getElementById('cuname').value;
-if(!uname)
-{
- document.getElementById('err_uname').innerText="Uname is Required";
- return false;
-}
-}
-</script>
+<script src="/assets/js/validate.js"></script>

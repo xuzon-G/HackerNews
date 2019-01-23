@@ -152,7 +152,7 @@ class User
 		public function imagePost($uname,$post,$file)
 	{
 		if ($this->checkImage($file)) {
-			$path='../assets/';
+			$path='../assets/images';
 			
 			$newfilename= date('dmYHis');
 			$ext = pathinfo($file['UploadImage']['name'], PATHINFO_EXTENSION);

@@ -104,7 +104,7 @@ if ($routeName=="beststories")
 							 
 							<img style="height:380px;padding-top: 10px" class="img-responsive img-rounded" src=<?php echo "'".$image."'"; ?>  >
 							 <?php }else {?>
-							 	<img src="/assets/noimage.gif" class="img-responsive img-rounded" style="height: 380px;padding-top: 10px;padding-bottom: 10px">
+							 	<img src="/assets/images/ask.gif" class="img-responsive img-rounded" style="height: 380px;padding-top: 10px;padding-bottom: 10px;width:100%">
 							 <?php }?> 
 						</div>
 					</div>	
