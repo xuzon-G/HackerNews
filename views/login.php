@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-include('/Controller/User.php');
 if (isset($_SESSION['user'])) {
  header('location:/views/home');
  }
@@ -20,12 +18,14 @@ if (isset($_SESSION['user'])) {
               <div class="modal-body">
                 <div class="well">
                   <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                    <li><a href="#create" data-toggle="tab">Create Account</a></li>
+                  <li id="createTab" class=<?php if($_GET['errid']){echo "";}else{echo "active";} ?> ><a href="#login" data-toggle="tab">Login</a></li>
+                  <li id="loginTab" class=<?php if($_GET['errid']){echo "active";}?>><a href="#create" data-toggle="tab">Create Account</a></li>
+                   
+                    
                   </ul>
                   <div id="myTabContent" class="tab-content">
 
-                    <div class="tab-pane active in" id="login" style="margin-top: 10px">
+                    <div class="tab-pane " id="login" style="margin-top: 10px">
                           <form action="/Controller/User.php" method="POST" >
                         <div class="form-group">
                           <label for="username">Username:</label>
@@ -35,18 +35,19 @@ if (isset($_SESSION['user'])) {
                           <label for="pwd">Password:</label>
                           <input type="password" class="form-control" id="pwd" name="password">
                         </div>
+                        <p class="text-danger"><?php if($_GET['err']) {echo "Username or password do not matched";}?></p>
                         <div class="checkbox">
                           <label><input type="checkbox"> Remember me</label>
                         </div>
                         <input type="submit" class="btn btn-default" value="Login" name="user">
                         </form> 
                     </div>
-                    <div class="tab-pane fade" id="create" style="margin-top: 10px">
-                       <form action=<?php echo $_SERVER["PHP_SELF"];?> id="tab" method="POST" onsubmit="return validateForm();">
+                    <div class="tab-pane <?php if($_GET['errid']){echo "active in";}else{echo "fade";}?>" id="create" style="margin-top: 10px">
+                       <form action="/Controller/User.php" id="tab" method="POST" onsubmit="return validateForm();">
                         <div class="form-group">
                           <label for="Username">Username:</label>
                           <input type="text" class="form-control" id="cuname" name="uname">
-                          <p id="err_uname" class=""></p>
+                          <p id="err_uname" class="text-danger"> <?php if($_GET['errid']==2){echo "Username already exist";} ?></p>
                         </div>
                         <div class="form-group">
                           <label for="email">Email:</label>

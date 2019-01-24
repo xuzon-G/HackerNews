@@ -78,7 +78,7 @@ if ($post['image']) {?>
            <h4>  <?php echo $post['post'];?>   </h4>
     </div>
         <div class="col-md-12" style="width:100%;">
-            <img src=<?php echo "../assets/images".$post['image'];?> class="img img-responsive">
+            <img src=<?php echo "../assets/images/".$post['image'];?> class="img img-responsive">
         </div>
     </div>
 

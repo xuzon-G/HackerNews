@@ -9,13 +9,16 @@ if (isset($_POST['user'])) {
 	$userInfo=$_POST['user'];
 	switch ($userInfo) {
 		case 'Login':
-			
 			$user->loginUser($_POST['uname'],$_POST['password']);
 			break;
 		
 		case 'Create':
-			$user->validateForm($_POST['uname'],$_POST['email'],$_POST['password']);
+			if($user->validateUname($_POST['uname']))
+			{
+				header('location:/views/login?errid=2');
+			}else{
 			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password']);
+			}
 			break;
 
 		case 'Comment':
@@ -91,14 +94,15 @@ class User
 
 					header('location:/views/home');
 					
-				}
+				}}
 				else{
-				echo "wrong password try again";
+				
+					header('location:/views/login?err=1');
 
 				}
 			
 			
-		}
+		
 		
 	
 
@@ -251,12 +255,16 @@ public function asmtComment($uname,$cmt,$hid)
 				return true;
 
 	}
-	public function validateForm($uname ,$email ,$password)
+	public function validateUname($uname)
 	{
-			if(empty($uname))
-			{
-
-			}
+		$query="Select * from tbl_user where uname='".$uname."'";
+		
+		$result=mysqli_query($this->conn,$query);
+		
+		if (mysqli_num_rows($result)>0) {
+			
+		return true;
+		}
 	}
 }
 

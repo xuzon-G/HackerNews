@@ -11,11 +11,14 @@ var err_uname=document.getElementById('err_uname');
  err_uname.classList.add("text-danger");
  return false;
 }
-if(password!=confirmpwd)
+else if(password!=confirmpwd)
 {var err_pwd=document.getElementById('err_pwd');
     err_pwd.innerText="Confirm password doesnot match with password";
     err_pwd.classList.add("text-danger");
     return false;
+}
+else{
+    return true;
 }
 
 
