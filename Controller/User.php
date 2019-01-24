@@ -13,15 +13,18 @@ if (isset($_POST['user'])) {
 			break;
 		
 		case 'Create':
+	
+
 			if($user->validateUname($_POST['uname']))
 			{
-				header('location:/views/login?errid=2');
+				header('location:/views/login?errid=2');echo "<pre>";
+			
 			}elseif($user->validateEmail($_POST['email']))
 			{
 				header('location:/views/login?errid=3');
 			}
 			else{
-			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password']);
+			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password'],$_POST['Semester'],$_POST['faculty'],$_FILES);
 			}
 			break;
 
@@ -59,31 +62,45 @@ class User
 
 	
 
-	public function registerUser($username,$email,$password)
+	public function registerUser($username,$email,$password,$semester,$faculty,$file)
 
 	{
 		$pwd=$this->helper($password);
-		$query="Insert into tbl_user SET uname='".$username."',
+		if ($this->checkImage( $_FILES['UploadProfile']['name'])) {
+			$path='../assets/profilePic/';
+			
+			$newfilename= date('dmYHis');
+			$ext = pathinfo($file['UploadProfile']['name'], PATHINFO_EXTENSION);
+			$newfilename=$newfilename.".".$ext;
+		
+		
+
+			move_uploaded_file($file["UploadProfile"]["tmp_name"], $path.$newfilename);
+
+		 $query="Insert into tbl_user SET uname='".$username."',
 											email='".$email."',
-											password='".$pwd."'";
+											semester='".$semester."',
+											faculty='".$faculty."',
+											profilepic='".$newfilename."',
+										password='".$pwd."'";
 					
 		
-		if(mysqli_query($this->conn,$query))
+	 if(mysqli_query($this->conn,$query))
 		{
 			session_start();
 			$_SESSION['user']=$username;
 			
 			header('Location:/views');
 
-		}else
+			}else
 		{
-			echo "insert failed";
-		}
+		 	echo "insert failed";
+		 }
 
 	
 
 	}
-
+	}
 
 	public function loginUser($username, $password)
 	{     
@@ -161,7 +178,7 @@ class User
 	}
 		public function imagePost($uname,$post,$file)
 	{
-		if ($this->checkImage($file)) {
+		if ($this->checkImage( $_FILES['UploadImage']['name'])) {
 			$path='../assets/images/';
 			
 			$newfilename= date('dmYHis');
@@ -249,10 +266,10 @@ public function asmtComment($uname,$cmt,$hid)
 	}
 
 
-	public function checkImage($file)
+	public function checkImage($file_Name)
 	{
 			$allowed =  array('gif','png' ,'jpg');
-			$filename = $_FILES['UploadImage']['name'];
+			$filename =$file_Name;
 			$ext = pathinfo($filename, PATHINFO_EXTENSION);
 
 			if(!in_array($ext,$allowed) ) {
