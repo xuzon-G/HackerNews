@@ -16,7 +16,11 @@ if (isset($_POST['user'])) {
 			if($user->validateUname($_POST['uname']))
 			{
 				header('location:/views/login?errid=2');
-			}else{
+			}elseif($user->validateEmail($_POST['email']))
+			{
+				header('location:/views/login?errid=3');
+			}
+			else{
 			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password']);
 			}
 			break;
@@ -66,7 +70,9 @@ class User
 		
 		if(mysqli_query($this->conn,$query))
 		{
+			session_start();
 			$_SESSION['user']=$username;
+			
 			header('Location:/views');
 
 		}else
@@ -156,7 +162,7 @@ class User
 		public function imagePost($uname,$post,$file)
 	{
 		if ($this->checkImage($file)) {
-			$path='../assets/images';
+			$path='../assets/images/';
 			
 			$newfilename= date('dmYHis');
 			$ext = pathinfo($file['UploadImage']['name'], PATHINFO_EXTENSION);
@@ -258,6 +264,17 @@ public function asmtComment($uname,$cmt,$hid)
 	public function validateUname($uname)
 	{
 		$query="Select * from tbl_user where uname='".$uname."'";
+		
+		$result=mysqli_query($this->conn,$query);
+		
+		if (mysqli_num_rows($result)>0) {
+			
+		return true;
+		}
+	}
+	public function validateEmail($email)
+	{
+		$query="Select * from tbl_user where email='".$email."'";
 		
 		$result=mysqli_query($this->conn,$query);
 		

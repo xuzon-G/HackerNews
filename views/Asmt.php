@@ -66,7 +66,7 @@ $comment=new CommentData();
    
      <div class="panel panel-default row" style="margin-top: <?php echo $margintop;?>">
    
-    <div class="panel-body">
+    <div class="panel-body container-fluid">
         
          
 
@@ -74,10 +74,10 @@ $comment=new CommentData();
 <?php
 if ($post['image']) {?>
     <div class="col-md-12">
-    <div class="col-md-12">
+    <div class="row">
            <h4>  <?php echo $post['post'];?>   </h4>
     </div>
-        <div class="col-md-12" style="width:100%;">
+        <div class="row" style="width:100%;">
             <img src=<?php echo "../assets/images/".$post['image'];?> class="img img-responsive">
         </div>
     </div>
@@ -93,7 +93,7 @@ if ($post['image']) {?>
 
      
     </div>
-    <div class="panel-footer col-md-12">
+    <div class="panel-footer container-fluid">
                   <div class="col-md-1">
                  <h5>  <a href=<?php
                     if (isset($_SESSION['user'])) {
@@ -138,11 +138,11 @@ if ($post['image']) {?>
                         <?php
                         if ($post['image']) {?>
                             <div class="col-md-12" >
-                            <div class="col-md-12">
+                            <div class="row">
                                    <h4>  <?php echo $post['post'];?>   </h4>
                             </div>
-                                <div class="col-md-12" >
-                                    <img src=<?php echo "../assets/".$post['image'];?> class="img img-responsive" >
+                                <div class="row" >
+                                    <img src=<?php echo "../assets/images/".$post['image'];?> class="img img-responsive" >
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@ if ($post['image']) {?>
    
    
       <div class="modal-body row">
-           <div class="col-md-2">
+           <div class="col-md-1" style="margin-left:20px">
               <h5>  <a href=<?php
                     if (isset($_SESSION['user'])) {
                        echo "/Controller/LikesComments.php?uname=".$_SESSION['user']."&&pid=".$post['pid']."&&from=modal";
@@ -168,12 +168,12 @@ if ($post['image']) {?>
 
                  style="color:black;text-decoration: none"> <i class="fas fa-thumbs-up" style="size: 20px"></i></a> <?php $like->getLikes($post['pid']); ?> </h5>
                 </div>
-         <div class="col-md-3"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
+         <div class="col-md-2"> <h6><i class="far fa-clock" style="font-size: 15px"></i> <?php echo TimeConvert::get_time_ago($post['created_at']); ?></h6>
                            </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                      <h6><i class="fas fa-user-tie" style="font-size:15px"></i> <?php echo $post['uname']; ?></h6>
                 </div>         
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                   <h6>    <?php echo $comment->countComment($post['pid']); ?> <i class="fas fa-comments" style="font-size:15px"></i> Comment</h6>
               </div>
 

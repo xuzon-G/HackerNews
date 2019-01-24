@@ -25,7 +25,7 @@ if (isset($_SESSION['user'])) {
                   </ul>
                   <div id="myTabContent" class="tab-content">
 
-                    <div class="tab-pane " id="login" style="margin-top: 10px">
+                    <div class="tab-pane  <?php if($_GET['errid']){echo "fade";}else{echo "active in";}?>" id="login" style="margin-top: 10px">
                           <form action="/Controller/User.php" method="POST" >
                         <div class="form-group">
                           <label for="username">Username:</label>
@@ -53,6 +53,7 @@ if (isset($_SESSION['user'])) {
                           <label for="email">Email:</label>
                           <input type="email" class="form-control" id="cemail" name="email">
                         </div>
+                        <p id="err_uname" class="text-danger"> <?php if($_GET['errid']==3){echo "Email already taken try with new email id";} ?></p>
                         <div class="form-group">
                           <label for="pwd">Password:</label>
                           <input type="password" class="form-control" id="cpwd" name="password">
