@@ -162,6 +162,7 @@ class User
 		
 		$query="Insert into tbl_post SET uname='".$uname."',
 											created_at=".Time().",
+											profilePic=".Time().",
 											post='".$post."'";
 											
 											
@@ -192,6 +193,7 @@ class User
 			$query="Insert into tbl_post SET uname='".$uname."',
 											created_at=".Time().",
 											image='".$newfilename."',
+											profilePic='".$newfilename."',
 											post='".$post."'";
 
 											
@@ -213,7 +215,7 @@ class User
 
 	public function viewUserPost()
 	{
-				$queryPost="Select *from tbl_post ";
+				$queryPost="Select *from tbl_post";
 				$result=mysqli_query($this->conn,$queryPost);
 					$i=0;
 			while($row = mysqli_fetch_assoc($result))
