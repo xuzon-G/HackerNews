@@ -37,6 +37,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <p class="text-danger"><?php if($_GET['err']==2) {echo "Incorrect password please try again later";}?></p>
                         <p class="text-danger"><?php if($_GET['err']==1) {echo "User don't exist";}?></p>
+                      
                         <div class="checkbox">
                           <label><input type="checkbox"> Remember me</label>
                         </div>
@@ -58,7 +59,11 @@ if (isset($_SESSION['user'])) {
                           <input type="email" class="form-control" id="cemail" name="email" required="">
                         </div>
                         <p id="err_uname" class="text-danger"> <?php if($_GET['errid']==3){echo "Email already taken try with new email id";} ?></p>
-                        
+                        <div class="form-group">
+                          <label for="college">College:</label>
+                          <input type="text" class="form-control" id="college" name="college" required>
+                        </div>
+                        <p id="err_college" class="text-danger"></p>
                         <div class="form-group">
                           <label for="faculty">Choose your Faculty: </label>
                           <label class="radio-inline">

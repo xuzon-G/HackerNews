@@ -28,6 +28,7 @@ foreach (  $route as $value) {
 			<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Press+Start+2P|Zilla+Slab" rel="stylesheet"> 
 			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css
 ">
+<link href="https://fonts.googleapis.com/css?family=Exo+2|Major+Mono+Display" rel="stylesheet">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js" ></script>
 <link rel="stylesheet" type="text/css" href="/assets/style.css"> 
 						

@@ -25,7 +25,7 @@ if (isset($_POST['user'])) {
 				header('location:/views/login?errid=3');
 			}
 			else{
-			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password'],$_POST['Semester'],$_POST['faculty'],$_FILES);
+			$user->registerUser($_POST['uname'],$_POST['email'],$_POST['password'],$_POST['Semester'],$_POST['faculty'],$_FILES,$_POST['college']);
 			}
 			break;
 
@@ -63,7 +63,7 @@ class User
 
 	
 
-	public function registerUser($username,$email,$password,$semester,$faculty,$file)
+	public function registerUser($username,$email,$password,$semester,$faculty,$file,$college)
 
 	{
 		$pwd=$this->helper($password);
@@ -83,6 +83,7 @@ class User
 											semester='".$semester."',
 											faculty='".$faculty."',
 											profilePic='".$newfilename."',
+											college='".$college."',
 										password='".$pwd."'";
 					
 		
@@ -109,7 +110,7 @@ class User
 			
 			 $query="Select * from tbl_user where uname='".$username."'";
 
-		
+		  
 			$result=mysqli_query($this->conn,$query);
 			if (mysqli_num_rows($result)>0) {
 				$data=mysqli_fetch_assoc($result);

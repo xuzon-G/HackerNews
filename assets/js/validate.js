@@ -5,10 +5,10 @@ var uname=document.getElementById('cuname').value;
 var password=document.getElementById('cpwd').value;
 var confirmpwd=document.getElementById('cfmpwd').value;
 var semester=document.getElementById('semester').value;
-var faculty=document.getElementsByName('faculty');
-alert(faculty);
+var college=document.getElementById('college').value;
 
-if(!isNaN(( uname)))
+
+if(!isNaN((uname)))
 {
 var err_uname=document.getElementById('err_uname');
  err_uname.innerText="Username should not be number";
@@ -22,9 +22,14 @@ else if(password!=confirmpwd)
     return false;
 }else if(!semester)
 {
-    err_semester=document.getElementById('err_semester');
+  var  err_semester=document.getElementById('err_semester');
     err_semester.innerText=" You must select your Semester";
     return false;
+}else if(!isNaN((college)))
+{
+    var err_college=document.getElementById('err_college');
+    err_college.innerText="College name should not be number";
+ 
 }
 else{
     return true;

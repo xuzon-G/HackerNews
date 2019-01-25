@@ -68,6 +68,10 @@ class path
 	{
 		echo "<h1>this is error page</h1>";
 	}
+	function profiles()
+	{
+		include 'profiles.php';
+	}
 	
 
 }
@@ -80,12 +84,10 @@ switch($routeName)
 	case "job":
 		$p->job();
 		break;
-	case "ask":
-		$p->ask();
+	case "profiles":
+		$p->profiles();
 		break;
-	case 'shows':
-		$p->shows();
-		break;	
+	
 	case 'comments':
 		$p->comments();
 		break;

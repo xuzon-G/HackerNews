@@ -66,8 +66,17 @@ $comment=new CommentData();
    
      <div class="panel panel-default row" style="margin-top: <?php echo $margintop;?>">
    
+     
     <div class="panel-body container-fluid">
-        
+        <!-- profile picture  -->
+     <div class="row" id="profilePic">
+     <div class="col-md-12">
+         <a href="/views/profiles?uname=<?php echo $post['uname']; ?>">
+     <img  style="border-radius:50%;height:50px;width:50px;float:left" src="/assets/profilePic/<?php echo $post['profilePic']; ?>" class="img img-responsive ">
+     <h5 style="padding-left:60px;padding-top:5px"><b><?php  echo $post['uname'];?></b> </h5></a>
+     </div>
+     </div>  
+      <!--profile section end  -->
          
 
 <!-- This is image section-->
