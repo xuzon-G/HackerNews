@@ -9,6 +9,7 @@ if (isset($_POST['user'])) {
 	$userInfo=$_POST['user'];
 	switch ($userInfo) {
 		case 'Login':
+	
 			$user->loginUser($_POST['uname'],$_POST['password']);
 			break;
 		
@@ -81,7 +82,7 @@ class User
 											email='".$email."',
 											semester='".$semester."',
 											faculty='".$faculty."',
-											profilepic='".$newfilename."',
+											profilePic='".$newfilename."',
 										password='".$pwd."'";
 					
 		
@@ -104,21 +105,28 @@ class User
 
 	public function loginUser($username, $password)
 	{     
+		
 			
 			 $query="Select * from tbl_user where uname='".$username."'";
+
 		
 			$result=mysqli_query($this->conn,$query);
 			if (mysqli_num_rows($result)>0) {
 				$data=mysqli_fetch_assoc($result);
-					if ($this->helper($password)==$data['password'] ) {
+				
+					if ($this->helper($password)==$data['password'] )
+					 {
+
 					session_start();
 					$_SESSION['user']=$username;
-					
-
 					header('location:/views/home');
+							
 					
-				}}
-				else{
+				}else{
+					header('location:/views/login?err=2');	
+				}
+			}
+			else{
 				
 					header('location:/views/login?err=1');
 
@@ -159,16 +167,25 @@ class User
 
 	public function userPost($uname,$post)
 	{
+		$query="select profilePic from tbl_user where uname='".$uname."'";
+	
+		$result=mysqli_query($this->conn,$query);
+		$data=mysqli_fetch_assoc($result);
+		$profilePic=$data['profilePic'];
 		
-		$query="Insert into tbl_post SET uname='".$uname."',
+		
+
+		$query_Insert="Insert into tbl_post SET uname='".$uname."',
 											created_at=".Time().",
-											profilePic=".Time().",
+											profilePic='".$profilePic."',
 											post='".$post."'";
-											
+											echo $query_Insert;
+											die;
+										
 											
 					
 		
-		if(mysqli_query($this->conn,$query))
+		if(mysqli_query($this->conn,$query_Insert))
 		{
 			header('Location:/views/Asmt');
 		}else

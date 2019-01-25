@@ -35,11 +35,13 @@ if (isset($_SESSION['user'])) {
                           <label for="pwd">Password:</label>
                           <input type="password" class="form-control" id="pwd" name="password">
                         </div>
-                        <p class="text-danger"><?php if($_GET['err']) {echo "Username or password do not matched";}?></p>
+                        <p class="text-danger"><?php if($_GET['err']==2) {echo "Incorrect password please try again later";}?></p>
+                        <p class="text-danger"><?php if($_GET['err']==1) {echo "User don't exist";}?></p>
                         <div class="checkbox">
                           <label><input type="checkbox"> Remember me</label>
                         </div>
                         <input type="submit" class="btn btn-default" value="Login" name="user">
+                        
                         </form> 
                     </div>
 
