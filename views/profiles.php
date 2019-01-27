@@ -21,19 +21,19 @@ $data=$user->viewUserDetails($username);
     <title>Document</title>
 </head>
 <body>
-<div class="container" id="main" >
+<div class="container" id="main" style="width:40%">
     <!-- profile section -->
-<div class="row " style="margin-top:5%;">
+<div class="row " style="margin-top:5%;box-shadow:0px 0px 3px 3px #888;padding-top:5px;"  >
    
             <div class="card " style="font-family: 'Exo 2', sans-serif;">
                 <div  style="display: flex;flex-wrap: wrap;justify-content: center;align-items: center;flex-direction: column;">
-                    <img  style="border-radius:50%;height:200px;width:200px" class="card-img-top img-responsive center" src="/assets/profilePic/<?php echo $data['profilePic']; ?>" alt="Card image cap">
-                    <h1>Profile Details</h1>
-                    <h2><b>User Name:</b> <?php echo $data['uname'];?></h2>
-                    <h2><b>College:</b> <?php echo $data['college'];?></h2>
+                    <img  style="border-radius:50%;height:150px;width:150px" class="card-img-top img-responsive center" src="/assets/profilePic/<?php echo $data['profilePic']; ?>" alt="Card image cap">
+                    <h2>Profile Details</h2>
+                    <h4><b>User Name:</b> <?php echo $data['uname'];?></h4>
+                    <h4><b>College:</b> <?php echo $data['college'];?></h4>
 
-                    <h2> <b>Faculty:</b><?php echo $data['faculty'];?></h2>
-                    <h2><b>Semester: </b><?php echo $data['semester'];?></h2>
+                    <h4> <b>Faculty:</b><?php echo $data['faculty'];?></h4>
+                    <h4><b>Semester: </b><?php echo $data['semester'];?></h4>
                 </div>
                  
                   </div>

@@ -58,7 +58,7 @@ $comment=new CommentData();
     </div>
 
 <?php foreach ($viewPost as $key => $post) {
-     print_r($post);
+    
     if ($key==0) {
         $margintop="5px";
     }
